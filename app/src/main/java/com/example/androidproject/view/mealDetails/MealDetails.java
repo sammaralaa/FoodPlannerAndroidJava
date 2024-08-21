@@ -89,17 +89,25 @@ public class MealDetails extends Fragment implements IMealDetails {
                 if(user.isAnonymous()){
                     Toast.makeText(view.getContext(), "you need to login first", Toast.LENGTH_SHORT).show();
                 }
-                presenter.addToFav(mealFull);
+                else{
+                    presenter.addToFav(mealFull);
+                }
+
             }
         });
 
         addToPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mealType = mealTypeSpinner.getSelectedItem().toString();
-                //@NonNull String date, @NonNull String mealType, String dayOfWeek, String mealID, String mealName, String mealThump)
-                weeklyPlanMeal = new WeeklyPlanMeal(selectedDate,mealType,meal.getId(),meal.getMealName(),meal.getMealThumb());
-                presenter.addToPlan(weeklyPlanMeal , mealFull);
+                if(user.isAnonymous()){
+                    Toast.makeText(view.getContext(), "you need to login first", Toast.LENGTH_SHORT).show();
+                }
+                {
+                    String mealType = mealTypeSpinner.getSelectedItem().toString();
+                    //@NonNull String date, @NonNull String mealType, String dayOfWeek, String mealID, String mealName, String mealThump)
+                    weeklyPlanMeal = new WeeklyPlanMeal(selectedDate, mealType, meal.getId(), meal.getMealName(), meal.getMealThumb());
+                    presenter.addToPlan(weeklyPlanMeal, mealFull);
+                }
             }
         });
 
