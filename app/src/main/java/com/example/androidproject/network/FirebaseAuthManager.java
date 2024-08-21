@@ -18,9 +18,13 @@ public class FirebaseAuthManager {
     private FirebaseAuth mAuth;
     private Activity activity;
     IWelcom iWelcom;
-    public FirebaseAuthManager(Activity activity) {
+    public FirebaseAuthManager(Activity activity,IWelcom iWelcom) {
         this.mAuth = FirebaseAuth.getInstance();
         this.activity = activity;
+        this.iWelcom=iWelcom;
+    }
+    public FirebaseAuthManager (){
+        this.mAuth = FirebaseAuth.getInstance();
     }
 
     // Sign up with email and password

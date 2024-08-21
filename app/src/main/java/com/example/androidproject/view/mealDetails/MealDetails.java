@@ -16,13 +16,16 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.model.mealsModel.Meal;
+import com.example.androidproject.network.FirebaseAuthManager;
 import com.example.androidproject.presenter.MealDetailsPresenter;
+import com.google.firebase.auth.FirebaseUser;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -42,6 +45,8 @@ public class MealDetails extends Fragment implements IMealDetails {
     Button addToFav , addToPlan;
     Spinner mealTypeSpinner;
     String selectedDate;
+    FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
+
     public MealDetails() {
         // Required empty public constructor
     }
@@ -63,7 +68,7 @@ public class MealDetails extends Fragment implements IMealDetails {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Meal meal = MealDetailsArgs.fromBundle(getArguments()).getMealData();
-
+        FirebaseUser user = firebaseAuthManager.getCurrentUser();
         presenter = new MealDetailsPresenter(this, MealsLocalDataSource.getInstance(this.getContext()));
         presenter.getMealByID(meal.getId());
         Log.i("TAG", "onViewCreated: id = " + meal.getId());
@@ -81,6 +86,9 @@ public class MealDetails extends Fragment implements IMealDetails {
         addToFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(user.isAnonymous()){
+                    Toast.makeText(view.getContext(), "you need to login first", Toast.LENGTH_SHORT).show();
+                }
                 presenter.addToFav(mealFull);
             }
         });
