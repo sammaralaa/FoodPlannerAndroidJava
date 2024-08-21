@@ -96,7 +96,7 @@ public class FirebaseAuthManager {
     // Logout
     public void logout() {
         mAuth.signOut();
-        Toast.makeText(activity, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(activity, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
     }
 
     // Get current user

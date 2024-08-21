@@ -12,7 +12,6 @@
         android:id="@+id/lottieAnimationView"
         app:lottie_rawRes="@raw/animation"
         app:lottie_autoPlay="true"
-        app:lottie_loop="true"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:layout_constraintStart_toStartOf="parent"

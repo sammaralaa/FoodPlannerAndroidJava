@@ -26,8 +26,8 @@
     <fragment
         android:id="@+id/welcomeScreenFragment"
         android:name="com.example.androidproject.WelcomeScreenFragment"
-        android:label="fragment_welcome_screen"
-        tools:layout="@layout/fragment_welcome_screen" >
+        android:label="Welcom"
+        tools:layout="@layout/fragment_welcome_screen">
         <action
             android:id="@+id/action_welcomeScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

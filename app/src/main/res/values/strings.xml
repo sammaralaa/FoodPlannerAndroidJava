@@ -27,6 +27,7 @@
     <string name="itIsCoockingTime">It\'s Coocking Time</string>
     <string name="letsGetStarted">Let\'s get started:</string>
     <string name="continueAsGuest">Continue as a guest</string>
+    <string name="loggingOut">Logging Out</string>
 
     <string-array name="days_of_week">
         <item>Breakfast</item>
