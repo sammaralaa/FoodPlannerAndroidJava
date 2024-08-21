@@ -12,14 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.androidproject.network.FirebaseAuthManager;
+import com.example.androidproject.presenter.welcomScreenPresenter;
 import com.example.androidproject.view.home.HomeActivity;
 
 
-public class WelcomeScreenFragment extends Fragment {
+public class WelcomeScreenFragment extends Fragment implements IWelcom {
 
     Button login , signup,guest;
-
+    welcomScreenPresenter presenter;
+    FirebaseAuthManager firebaseAuthManager;
     public WelcomeScreenFragment() {
         // Required empty public constructor
     }
@@ -41,6 +45,7 @@ public class WelcomeScreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        firebaseAuthManager = new FirebaseAuthManager(this.getActivity());
         login = view.findViewById(R.id.welcomLoginbtn);
         signup = view.findViewById(R.id.welcomSignupbtn);
         guest = view.findViewById(R.id.welcomGuestbtn);
@@ -63,9 +68,21 @@ public class WelcomeScreenFragment extends Fragment {
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), HomeActivity.class);
-                startActivity(intent);
+                firebaseAuthManager.loginAnonymously();
+
             }
         });
+    }
+
+    @Override
+    public void successLognAnonymously() {
+        Toast.makeText(this.getActivity(), "Anonymous Login Successful", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this.getContext(), HomeActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void failedLoginAnonymously() {
+        Toast.makeText(this.getActivity(), "Anonymous Login Failed: " , Toast.LENGTH_SHORT).show();
     }
 }

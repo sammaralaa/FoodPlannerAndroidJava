@@ -1,5 +1,6 @@
 package com.example.androidproject;
 
 public interface IWelcom {
-   public void shoewLognAnonymously();
+   public void successLognAnonymously();
+   public void failedLoginAnonymously();
 }

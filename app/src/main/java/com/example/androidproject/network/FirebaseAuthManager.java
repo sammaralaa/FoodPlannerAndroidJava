@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.androidproject.IWelcom;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -16,7 +17,7 @@ public class FirebaseAuthManager {
 
     private FirebaseAuth mAuth;
     private Activity activity;
-
+    IWelcom iWelcom;
     public FirebaseAuthManager(Activity activity) {
         this.mAuth = FirebaseAuth.getInstance();
         this.activity = activity;
@@ -73,13 +74,16 @@ public class FirebaseAuthManager {
                         if (task.isSuccessful()) {
                             // Login success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Log.d("FirebaseAuthManager", "signInAnonymously:success");
-                            Toast.makeText(activity, "Anonymous Login Successful", Toast.LENGTH_SHORT).show();
+                            iWelcom.successLognAnonymously();
+                           // Log.d("FirebaseAuthManager", "signInAnonymously:success");
+                           //
+
                         } else {
+
+                            iWelcom.failedLoginAnonymously();
                             // If login fails, display a message to the user.
-                            Log.w("FirebaseAuthManager", "signInAnonymously:failure", task.getException());
-                            Toast.makeText(activity, "Anonymous Login Failed: " + task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
+                           // Log.w("FirebaseAuthManager", "signInAnonymously:failure", task.getException());
+                           //
                         }
                     }
                 });
