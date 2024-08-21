@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_activity_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/mealDetails"
+        android:name="com.example.androidproject.view.mealDetails.MealDetails"
+        android:label="@string/mealDetails"
+        tools:layout="@layout/fragment_meal_details">
+        <argument
+            android:name="mealData"
+            app:argType="com.example.androidproject.model.mealsModel.Meal" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.androidproject.view.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_mealDetails3"
+            app:destination="@id/mealDetails"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_mealsOnCategoryFragment"
+            app:destination="@id/mealsOnCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.androidproject.view.favorites.FavoriteFragment"
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorite" >
+
+
+        <action
+            android:id="@+id/action_favoriteFragment_to_favMealDetailsFragment"
+            app:destination="@id/favMealDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.androidproject.view.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/logOutFragment"
+        android:name="com.example.androidproject.LogOutFragment"
+        android:label="@string/logout"
+        tools:layout="@layout/fragment_log_out" />
+    <fragment
+        android:id="@+id/mealsOnCategoryFragment"
+        android:name="com.example.androidproject.view.category_card.MealsInCategoryFragment"
+        android:label="@string/meals"
+        tools:layout="@layout/fragment_meals_in_category" >
+        <argument
+            android:name="CategoryName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_mealsOnCategoryFragment_to_mealDetails"
+            app:destination="@id/mealDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/planFragment"
+        android:name="com.example.androidproject.view.weekly_plan.PlanFragment"
+        android:label="fragment_plan"
+        tools:layout="@layout/fragment_plan" >
+
+        <action
+            android:id="@+id/action_planFragment_to_weeklyPlanMealDetailsFragment"
+            app:destination="@id/weeklyPlanMealDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weeklyPlanMealDetailsFragment"
+        android:name="com.example.androidproject.view.weekly_plan.WeeklyPlanMealDetailsFragment"
+        android:label="fragment_weekly_plan_meal_details"
+        tools:layout="@layout/fragment_weekly_plan_meal_details" >
+
+        <argument
+            android:name="mealId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/favMealDetailsFragment"
+        android:name="com.example.androidproject.FavMealDetailsFragment"
+        android:label="FavMealDetailsFragment" >
+        <argument
+            android:name="MealDetails"
+            app:argType="com.example.androidproject.model.mealsModel.Meal" />
+    </fragment>
+</navigation>

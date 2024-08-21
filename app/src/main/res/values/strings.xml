@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Food Planner</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="signupOption">Don\'t have an account?</string>
+    <string name="signup">Sign Up</string>
+    <string name="addToFav">Add To Favorite</string>
+    <string name="mealDetails">Meal Details</string>
+    <string name="mealCard">Meal Card</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="search">Search</string>
+    <string name="logout">Logout</string>
+    <string name="mealOfTheDay">Meal Of The Day</string>
+    <string name="beafMeals">Beaf Meals</string>
+    <string name="allcategories">All Categories</string>
+    <string name="meals">Meals</string>
+    <string name="byCategory">Category</string>
+    <string name="country">Country</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="searchBy">Search By:</string>
+    <string name="allCountries">All Countries</string>
+    <string name="yourPlan">Your Weekly Plan</string>
+    <string name="addToYourPlan">Add To Your Plan</string>
+    <string name="removeFromFav">Remove from favorite</string>
+    <string name="itIsCoockingTime">It\'s Coocking Time</string>
+    <string name="letsGetStarted">Let\'s get started:</string>
+    <string name="continueAsGuest">Continue as a guest</string>
+
+    <string-array name="days_of_week">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+        <item>Dessert</item>
+    </string-array>
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".WelcomeScreenFragment">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        app:lottie_rawRes="@raw/animation"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/lightGray"
+
+        />
+
+    <TextView
+        android:id="@+id/timetxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/itIsCoockingTime"
+        app:layout_constraintEnd_toEndOf="@id/lottieAnimationView"
+        app:layout_constraintStart_toStartOf="@id/lottieAnimationView"
+        app:layout_constraintTop_toBottomOf="@id/lottieAnimationView"
+        android:textColor="@color/green"
+        android:gravity="center"
+        android:textSize="40dp"
+        />
+
+    <TextView
+        android:id="@+id/starttxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/letsGetStarted"
+        android:textColor="@color/green"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="@id/timetxt"
+        app:layout_constraintStart_toStartOf="@id/timetxt"
+        app:layout_constraintTop_toBottomOf="@id/timetxt" />
+
+    <Button
+        android:id="@+id/welcomLoginbtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@id/starttxt"
+        app:layout_constraintStart_toStartOf="@id/starttxt"
+        app:layout_constraintTop_toBottomOf="@id/starttxt" />
+
+    <Button
+        android:id="@+id/welcomSignupbtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+
+        app:layout_constraintEnd_toEndOf="@id/welcomLoginbtn"
+        app:layout_constraintStart_toStartOf="@id/welcomLoginbtn"
+        app:layout_constraintTop_toBottomOf="@id/welcomLoginbtn" />
+
+    <Button
+        android:id="@+id/welcomGuestbtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/continueAsGuest"
+        android:textSize="15dp"
+        android:layout_marginTop="15dp"
+
+        app:layout_constraintEnd_toEndOf="@id/welcomSignupbtn"
+        app:layout_constraintStart_toStartOf="@id/welcomSignupbtn"
+        app:layout_constraintTop_toBottomOf="@id/welcomSignupbtn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.weekly_plan.MealOnPlanCardFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/planMealCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Day of Week and Date Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/lightGreen">
+
+                <!-- Calendar Icon -->
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/calendar"
+                    android:layout_marginEnd="8dp"/>
+
+                <!-- Day of Week -->
+                <TextView
+                    android:id="@+id/dayText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Monday"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <!-- Date -->
+                <TextView
+                    android:id="@+id/dateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20/08/2024"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginStart="8dp"/>
+                <ImageView
+                    android:id="@+id/deleteMealPlan"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/delete"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    />
+
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                app:dividerColor="@color/green"/>
+
+            <!-- Meal Image and Name Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/pMealImg"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/account"
+                    android:layout_weight="1"
+                     />
+                <!-- Meal Name -->
+                <TextView
+                    android:id="@+id/pMealNametxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Paleo Jerk Chicken and Sweet Potatoes"
+                    android:textSize="20dp"
+                    android:textColor="@color/green"
+                    />
+
+            </LinearLayout>
+
+            <!-- Meal Type Section -->
+            <TextView
+                android:id="@+id/mealTypeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lunch"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:textColor="@color/green"
+                />
+
+            <!-- Meal ID (Optional) -->
+            <TextView
+                android:id="@+id/mealIDText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Meal ID: 12345"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

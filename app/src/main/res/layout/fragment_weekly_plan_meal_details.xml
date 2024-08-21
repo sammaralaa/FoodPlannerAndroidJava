@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.home.HomeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Meal Image -->
+        <ImageView
+            android:id="@+id/imgMealThumbPlan"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+
+            android:layout_marginBottom="16dp" />
+
+        <!-- Meal Name Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Meal Name:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealNamePlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Meal Name Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+
+        <!-- Meal Category Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealCategoryPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Meal Area Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealArea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Area:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealAreaPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Area Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Meal Tags Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTagsPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Meal Instructions Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Instructions:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealInstructionsPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Instructions Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- YouTube Link Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealYoutube"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="video:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtubePlayerViewPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
