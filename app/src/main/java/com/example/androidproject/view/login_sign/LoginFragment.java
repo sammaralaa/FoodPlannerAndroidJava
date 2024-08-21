@@ -60,7 +60,14 @@ public class LoginFragment extends Fragment {
         textView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signUpFragment);
+
+                if (auth.getCurrentUser().isAnonymous()){
+                    Navigation.findNavController(view).navigate(R.id.action_loginFragment2_to_signUpFragment2);
+
+                }
+                else{
+                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signUpFragment);
+                }
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {

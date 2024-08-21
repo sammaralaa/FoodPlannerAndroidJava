@@ -45,13 +45,19 @@ public class HomeActivity extends AppCompatActivity{
         Menu menu = navigationView.getMenu();
         MenuItem favItem = menu.findItem(R.id.favoriteFragment);
         MenuItem PlanItem = menu.findItem(R.id.planFragment);
+        MenuItem loginItem = menu.findItem(R.id.loginFragment2);
+        MenuItem logoutItem = menu.findItem(R.id.logOutFragment);
         if (user.isAnonymous()){
             favItem.setVisible(false);
             PlanItem.setVisible(false);
+            loginItem.setVisible(true);
+            logoutItem.setVisible(false);
         }
-        else{
+        else if (user != null){
             favItem.setVisible(true);
             PlanItem.setVisible(true);
+            loginItem.setVisible(false);
+            logoutItem.setVisible(true);
         }
 
 

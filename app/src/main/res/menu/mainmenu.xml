@@ -10,6 +10,11 @@
 
             />
         <item
+            android:id="@+id/loginFragment2"
+            android:title="@string/login"
+            android:icon="@drawable/login"
+            />
+        <item
             android:id="@+id/favoriteFragment"
             android:title="@string/favorite"
             android:icon="@drawable/favorite"
@@ -29,5 +34,6 @@
             android:title="@string/logout"
             android:icon="@drawable/logout"
             />
+
     </group>
 </menu>

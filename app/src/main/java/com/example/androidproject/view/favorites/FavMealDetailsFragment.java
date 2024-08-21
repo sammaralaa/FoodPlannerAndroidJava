@@ -1,4 +1,4 @@
-package com.example.androidproject;
+package com.example.androidproject.view.favorites;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -18,12 +18,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.view.mealDetails.IMealDetails;
-import com.example.androidproject.view.mealDetails.MealDetailsArgs;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
