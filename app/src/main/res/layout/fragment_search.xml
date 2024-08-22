@@ -68,15 +68,39 @@
         app:layout_constraintEnd_toEndOf="parent"
          />
 
+    <ImageView
+        android:id="@+id/sad"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/sentiment"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@id/matchtxt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <TextView
+        android:id="@+id/matchtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sad"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchResaultRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         tools:listitem="@layout/fragment_card"
-        app:layout_constraintTop_toBottomOf="@id/searchViewtxt"
+        app:layout_constraintTop_toTopOf="@id/searchViewtxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
+
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidproject.R;
@@ -33,6 +35,10 @@ public class SearchFragment extends Fragment implements ISearchView {
     SearchPresenter presenter;
     RecyclerView recyclerView;
     SearchAdapter adapter;
+    TextView errormsg;
+    ImageView errorImg;
+    String searchType;
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -60,6 +66,8 @@ public class SearchFragment extends Fragment implements ISearchView {
         countryButton = view.findViewById(R.id.countryRadioButton2);
         ingrediantButton = view.findViewById(R.id.ingredientRadioButton3);
         searchView = view.findViewById(R.id.searchViewtxt);
+        errorImg = view.findViewById(R.id.sad);
+        errormsg = view.findViewById(R.id.matchtxt);
         presenter = new SearchPresenter(this);
         recyclerView = view.findViewById(R.id.searchResaultRecycler);
         recyclerView.setHasFixedSize(false);
@@ -78,10 +86,13 @@ public class SearchFragment extends Fragment implements ISearchView {
 
                 if(selected==categoryButton.getId()){
                     presenter.searchByCategory(query);
+                    searchType = "category";
                 }else if(selected == countryButton.getId()){
                     presenter.searchByCountry(query);
+                    searchType = "country";
                 }else if(selected == ingrediantButton.getId()){
                     presenter.searchByIngrediant(query);
+                    searchType = "ingredient";
                 }else{
                     Toast.makeText(getContext(), "Select type of Search", Toast.LENGTH_SHORT).show();
                 }
@@ -94,6 +105,8 @@ public class SearchFragment extends Fragment implements ISearchView {
                 // Handle the text change (e.g., filter your list in real-time)
                 adapter = new SearchAdapter(view.getContext(), new ArrayList<>());
                 recyclerView.setAdapter(adapter);
+                errormsg.setVisibility(View.INVISIBLE);
+                errorImg.setVisibility(View.INVISIBLE);
                 return false;
             }
 
@@ -104,12 +117,17 @@ public class SearchFragment extends Fragment implements ISearchView {
     @Override
     public void searchResault(List<Meal> meals) {
         if (meals != null) {
+            errormsg.setVisibility(View.INVISIBLE);
+            errorImg.setVisibility(View.INVISIBLE);
             adapter = new SearchAdapter(this.getContext(), meals);
             recyclerView.setAdapter(adapter);
 
         }
         else{
-            Toast.makeText(this.getContext(), "search not found", Toast.LENGTH_SHORT).show();
+            errormsg.setVisibility(View.VISIBLE);
+            errorImg.setVisibility(View.VISIBLE);
+            errormsg.setText("Your search did not match any "+searchType);
+            //Toast.makeText(this.getContext(), "search not found", Toast.LENGTH_SHORT).show();
 
         }
     }
