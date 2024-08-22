@@ -109,6 +109,7 @@ public class MealDetails extends Fragment implements IMealDetails {
                 }
                 else{
                     presenter.addToFav(mealFull);
+                    Toast.makeText(view.getContext(), "Added to your favorites successfully", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -124,6 +125,8 @@ public class MealDetails extends Fragment implements IMealDetails {
                     //@NonNull String date, @NonNull String mealType, String dayOfWeek, String mealID, String mealName, String mealThump)
                     weeklyPlanMeal = new WeeklyPlanMeal(selectedDate, mealType, meal.getId(), meal.getMealName(), meal.getMealThumb());
                     presenter.addToPlan(weeklyPlanMeal, mealFull);
+                    Toast.makeText(view.getContext(), "Added to your Weekly plan successfully", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

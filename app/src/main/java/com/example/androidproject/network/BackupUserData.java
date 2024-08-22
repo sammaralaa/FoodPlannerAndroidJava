@@ -42,11 +42,11 @@ public class BackupUserData {
             String userId = user.getUid();
 
             // Backup FavMeals
-            CollectionReference collectionRef = firestore.collection("users")
+            CollectionReference collectionRefForFav = firestore.collection("users")
                     .document(userId)
                     .collection("FavMeals");
             Log.i("FirebaseAuth", "backupDataToFirestore: " + userId);
-            collectionRef.get().addOnCompleteListener(task -> {
+            collectionRefForFav.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     WriteBatch batch = firestore.batch();
                     for (QueryDocumentSnapshot document : task.getResult()) {
@@ -57,7 +57,7 @@ public class BackupUserData {
                             Executors.newSingleThreadExecutor().execute(() -> {
                                 List<Meal> items = mealDAO.getAllMealsForBackup();
                                 for (Meal item : items) {
-                                    collectionRef.document(item.idMeal).set(item)
+                                    collectionRefForFav.document(item.idMeal).set(item)
                                             .addOnSuccessListener(aVoid -> Log.d("FavMealsBackup", "Data backed up successfully - Meal : " + item.idMeal))
                                             .addOnFailureListener(e -> Log.e("FavMealsBackup", "Error backing up data", e));
                                 }
@@ -72,11 +72,11 @@ public class BackupUserData {
             });
 
             // Backup WeekPlan
-            CollectionReference collectionRefWeek = firestore.collection("users")
+            CollectionReference collectionRefForWeekPlan = firestore.collection("users")
                     .document(userId)
                     .collection("WeekPlan");
 
-            collectionRefWeek.get().addOnCompleteListener(task -> {
+            collectionRefForWeekPlan.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     WriteBatch batch = firestore.batch();
                     for (QueryDocumentSnapshot document : task.getResult()) {
@@ -87,7 +87,7 @@ public class BackupUserData {
                             Executors.newSingleThreadExecutor().execute(() -> {
                                 List<WeeklyPlanMeal> itemsWeek = weeklyPlanMealDao.getAllPlanMealsforBackup();
                                 for (WeeklyPlanMeal item : itemsWeek) {
-                                    collectionRefWeek.document(item.getMealID()).set(item)
+                                    collectionRefForWeekPlan.document(item.getMealID()).set(item)
                                             .addOnSuccessListener(aVoid -> Log.d("WeekPlanBackup", "Data backed up successfully - Meal : " + item.getMealID()))
                                             .addOnFailureListener(e -> Log.e("WeekPlanBackup", "Error backing up data", e));
                                 }
@@ -117,7 +117,7 @@ public class BackupUserData {
                             Executors.newSingleThreadExecutor().execute(() -> {
                                 List<WeeklyPlanMealDetails> itemsWeek = weeklyPlanMealDetailsDao.getAllPlanMealsforBackup();
                                 for (WeeklyPlanMealDetails item : itemsWeek) {
-                                    collectionRefWeek.document(item.idMeal).set(item)
+                                    collectionRefForWeekPlan.document(item.idMeal).set(item)
                                             .addOnSuccessListener(aVoid -> Log.i("WeekPlanBackup", "Data backed up successfully - Meal : " + item.idMeal))
                                             .addOnFailureListener(e -> Log.i("WeekPlanBackup", "Error backing up data", e));
                                 }
@@ -139,11 +139,11 @@ public class BackupUserData {
 
             Executors.newSingleThreadExecutor().execute(mealDAO::deleteAll);
 
-            CollectionReference collectionRef = firestore.collection("users")
+            CollectionReference collectionRefForFav = firestore.collection("users")
                     .document(userId)
                     .collection("FavMeals");
 
-            collectionRef.get().addOnCompleteListener(task -> {
+            collectionRefForFav.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Meal item = document.toObject(Meal.class);
@@ -158,11 +158,11 @@ public class BackupUserData {
 
             Executors.newSingleThreadExecutor().execute(weeklyPlanMealDao::deleteAll);
 
-            CollectionReference collectionRefWeek = firestore.collection("users")
+            CollectionReference collectionRefFoWeekPlan = firestore.collection("users")
                     .document(userId)
                     .collection("WeekPlan");
 
-            collectionRefWeek.get().addOnCompleteListener(task -> {
+            collectionRefFoWeekPlan.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         WeeklyPlanMeal item = document.toObject(WeeklyPlanMeal.class);
@@ -177,11 +177,11 @@ public class BackupUserData {
 
             Executors.newSingleThreadExecutor().execute(weeklyPlanMealDetailsDao::deleteAll);
 
-            CollectionReference collectionRefWeekDetails = firestore.collection("users")
+            CollectionReference collectionRefForWeekPlanDetails = firestore.collection("users")
                     .document(userId)
                     .collection("WeekPlanDetails");
 
-            collectionRefWeekDetails.get().addOnCompleteListener(task -> {
+            collectionRefForWeekPlanDetails.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         WeeklyPlanMealDetails item = document.toObject(WeeklyPlanMealDetails.class);
