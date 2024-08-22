@@ -32,16 +32,15 @@
                 android:id="@+id/txtTitleMealName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Meal Name:"
+                android:text="@string/mealName"
+                android:textColor="@color/green"
                 android:textSize="23dp"
-                android:textStyle="bold"
-                android:textColor="@color/green" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtMealName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Meal Name Value"
                 android:textSize="20dp"
                 android:textColor="@color/lightBlack"
                 android:layout_marginStart="8dp" />
@@ -59,16 +58,15 @@
                 android:id="@+id/txtTitleMealCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category:"
+                android:text="@string/category"
+                android:textColor="@color/green"
                 android:textSize="23dp"
-                android:textStyle="bold"
-                android:textColor="@color/green" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtMealCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category Value"
                 android:textSize="20dp"
                 android:textColor="@color/lightBlack"
                 android:layout_marginStart="8dp" />
@@ -85,16 +83,15 @@
                 android:id="@+id/txtTitleMealArea"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Area:"
+                android:text="@string/area"
+                android:textColor="@color/green"
                 android:textSize="23dp"
-                android:textStyle="bold"
-                android:textColor="@color/green" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtMealArea"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Area Value"
                 android:textSize="20dp"
                 android:textColor="@color/lightBlack"
                 android:layout_marginStart="8dp" />
@@ -134,17 +131,18 @@
                 android:id="@+id/txtTitleMealInstructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Instructions:"
+
+                android:text="@string/instructions"
+                android:textColor="@color/green"
                 android:textSize="23dp"
-                android:textStyle="bold"
-                android:textColor="@color/green" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtMealInstructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Instructions Value"
-                android:textSize="30dp"
+
+                android:textSize="20dp"
                 android:textColor="@color/lightBlack"
                 android:layout_marginTop="4dp" />
         </LinearLayout>
@@ -160,10 +158,10 @@
                 android:id="@+id/txtTitleMealYoutube"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="video:"
+                android:text="@string/video"
+                android:textColor="@color/green"
                 android:textSize="23dp"
-                android:textStyle="bold"
-                android:textColor="@color/green" />
+                android:textStyle="bold" />
 
             <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                 android:id="@+id/youtubePlayerView"
@@ -189,6 +187,7 @@
                 android:clickable="true"
                 />
             <Spinner
+
                 android:id="@+id/spinnerDayOfWeek"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

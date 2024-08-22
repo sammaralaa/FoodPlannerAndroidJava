@@ -26,7 +26,9 @@
             app:exitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_homeFragment_to_mealsOnCategoryFragment"
-            app:destination="@id/mealsOnCategoryFragment" />
+            app:destination="@id/mealsOnCategoryFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -37,7 +39,9 @@
 
         <action
             android:id="@+id/action_favoriteFragment_to_favMealDetailsFragment"
-            app:destination="@id/favMealDetailsFragment" />
+            app:destination="@id/favMealDetailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -46,7 +50,9 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_mealDetails"
-            app:destination="@id/mealDetails" />
+            app:destination="@id/mealDetails"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/logOutFragment"
@@ -60,7 +66,9 @@
         tools:layout="@layout/fragment_meals_in_category" >
         <action
             android:id="@+id/action_mealsOnCategoryFragment_to_mealDetails"
-            app:destination="@id/mealDetails" />
+            app:destination="@id/mealDetails"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
         <argument
             android:name="name"
             app:argType="string" />
@@ -76,7 +84,9 @@
 
         <action
             android:id="@+id/action_planFragment_to_weeklyPlanMealDetailsFragment"
-            app:destination="@id/weeklyPlanMealDetailsFragment" />
+            app:destination="@id/weeklyPlanMealDetailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/weeklyPlanMealDetailsFragment"
@@ -103,7 +113,9 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment2_to_signUpFragment2"
-            app:destination="@id/signUpFragment2" />
+            app:destination="@id/signUpFragment2"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment2"

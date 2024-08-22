@@ -29,6 +29,11 @@
     <string name="continueAsGuest">Continue as a guest</string>
     <string name="loggingOut">Logging Out</string>
     <string name="ingredients">"Ingredients: "</string>
+    <string name="category">Category:</string>
+    <string name="mealName">Meal Name:</string>
+    <string name="video">Video:</string>
+    <string name="area">Area:</string>
+    <string name="instructions">Instructions:</string>
 
     <string-array name="days_of_week">
         <item>Breakfast</item>
