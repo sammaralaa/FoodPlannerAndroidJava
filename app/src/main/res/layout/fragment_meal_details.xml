@@ -120,10 +120,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -132,7 +133,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -145,10 +146,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -157,7 +159,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -169,10 +171,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -181,7 +184,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -193,10 +196,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -205,7 +209,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -217,10 +221,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -229,7 +234,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -241,10 +246,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -253,7 +259,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -265,10 +271,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -277,7 +284,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -289,10 +296,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -301,7 +309,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -313,10 +321,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="15dp"
+            >
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -325,7 +335,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -336,11 +346,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -349,7 +360,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -358,13 +369,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -373,7 +385,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -382,13 +394,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -397,7 +410,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -406,13 +419,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -421,7 +435,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -430,13 +444,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -445,7 +460,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -454,13 +469,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -469,7 +485,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -478,13 +494,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -493,7 +510,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -502,13 +519,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -517,7 +535,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -526,13 +544,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -541,7 +560,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -550,13 +569,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -565,7 +585,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
@@ -574,13 +594,14 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="8dp">
 
             <TextView
-                android:id="@+id/txtTitleMealTags"
+                android:id="@+id/ingredient20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags:"
@@ -589,7 +610,7 @@
                 android:textColor="@color/green" />
 
             <TextView
-                android:id="@+id/txtMealTags"
+                android:id="@+id/measurement20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tags Value"
