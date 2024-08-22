@@ -16,6 +16,9 @@ public interface MealDAO {
     @Query("SELECT * FROM meals_table")
     LiveData<List<Meal>> getAllMeals();
 
+    @Query("SELECT * FROM meals_table")
+    List<Meal> getAllMealsForBackup();
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMeal(Meal meal);
 

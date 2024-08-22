@@ -16,6 +16,9 @@ public interface WeeklyPlanMealDao {
     @Query("SELECT * FROM weekly_plan")
     LiveData<List<WeeklyPlanMeal>> getAllPlanMeals();
 
+    @Query("SELECT * FROM weekly_plan")
+    List<WeeklyPlanMeal> getAllPlanMealsforBackup();
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMeal(WeeklyPlanMeal meal);
 
