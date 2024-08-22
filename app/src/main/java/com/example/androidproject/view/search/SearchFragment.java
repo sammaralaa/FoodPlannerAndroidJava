@@ -32,7 +32,7 @@ public class SearchFragment extends Fragment implements ISearchView {
     SearchView searchView;
     SearchPresenter presenter;
     RecyclerView recyclerView;
-    MealCardAdapter adapter;
+    SearchAdapter adapter;
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -62,12 +62,12 @@ public class SearchFragment extends Fragment implements ISearchView {
         searchView = view.findViewById(R.id.searchViewtxt);
         presenter = new SearchPresenter(this);
         recyclerView = view.findViewById(R.id.searchResaultRecycler);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
         LinearLayoutManager layoutManager3 =new LinearLayoutManager(view.getContext());
         layoutManager3.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager3);
         recyclerView.setVisibility(View.VISIBLE);
-        adapter = new MealCardAdapter(view.getContext(),new ArrayList<>());
+        adapter = new SearchAdapter(view.getContext(),new ArrayList<>());
         recyclerView.setAdapter(adapter);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -92,8 +92,11 @@ public class SearchFragment extends Fragment implements ISearchView {
             public boolean onQueryTextChange(String newText) {
               //  recyclerView.setVisibility(View.INVISIBLE);
                 // Handle the text change (e.g., filter your list in real-time)
+                adapter = new SearchAdapter(view.getContext(), new ArrayList<>());
+                recyclerView.setAdapter(adapter);
                 return false;
             }
+
         });
 
     }
@@ -101,7 +104,7 @@ public class SearchFragment extends Fragment implements ISearchView {
     @Override
     public void searchResault(List<Meal> meals) {
         if (meals != null) {
-            adapter = new MealCardAdapter(this.getContext(), meals);
+            adapter = new SearchAdapter(this.getContext(), meals);
             recyclerView.setAdapter(adapter);
 
         }
