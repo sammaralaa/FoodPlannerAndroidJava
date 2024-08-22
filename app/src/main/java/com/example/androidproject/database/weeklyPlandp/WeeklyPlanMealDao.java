@@ -25,6 +25,12 @@ public interface WeeklyPlanMealDao {
     @Delete
     void deleteMeal(WeeklyPlanMeal meal);
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertMany(WeeklyPlanMeal... meals);
+
+    @Query("DELETE FROM weekly_plan") // Replace with your table name
+    void deleteAll();
+
 //    @Query("SELECT * FROM weekly_plan WHERE day = :day")
 //    LiveData<List<WeeklyPlanMeal>> getMealsForDay(String day);
 }

@@ -11,7 +11,7 @@ import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
 import com.example.androidproject.model.mealsModel.Meal;
 
-@Database(entities = {Meal.class , WeeklyPlanMeal.class , WeeklyPlanMealDetails.class},version = 8)
+@Database(entities = {Meal.class , WeeklyPlanMeal.class , WeeklyPlanMealDetails.class},version = 9)
 public abstract class Room extends RoomDatabase {
     private static Room instance =null;
     public abstract MealDAO getMealDao();

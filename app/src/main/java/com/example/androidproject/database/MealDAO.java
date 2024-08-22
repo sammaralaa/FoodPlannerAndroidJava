@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.model.mealsModel.Meal;
 
 import java.util.List;
@@ -25,5 +26,10 @@ public interface MealDAO {
     @Delete
     void deleteMeal(Meal meal);
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertMany(Meal... meals);
+
+    @Query("DELETE FROM meals_table") // Replace with your table name
+    void deleteAll();
 
 }

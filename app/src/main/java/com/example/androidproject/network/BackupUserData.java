@@ -132,5 +132,48 @@ public class BackupUserData {
             });
         }
     }
-
+//    public void restoreDataFromFirestore() {
+//        FirebaseUser user = auth.getCurrentUser();
+//        if (user != null) {
+//            String userId = user.getUid();
+//
+//            Executors.newSingleThreadExecutor().execute(mealDAO::clearTable);
+//
+//            CollectionReference collectionRef = firestore.collection("users")
+//                    .document(userId)
+//                    .collection("FavMeals");
+//
+//            collectionRef.get().addOnCompleteListener(task -> {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        Room item = document.toObject(Room.class);
+//                        Executors.newSingleThreadExecutor().execute(() -> {
+//                            mealDAO.insertMeal(item);
+//                        });
+//                    }
+//                } else {
+//                    Log.e("FavMealsRestore", "Error getting documents: ", task.getException());
+//                }
+//            });
+//
+//            Executors.newSingleThreadExecutor().execute(myWeekDao::clearTable);
+//
+//            CollectionReference collectionRefWeek = firestore.collection("users")
+//                    .document(userId)
+//                    .collection("WeekPlan");
+//
+//            collectionRefWeek.get().addOnCompleteListener(task -> {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        MealDBWeek item = document.toObject(MealDBWeek.class);
+//                        Executors.newSingleThreadExecutor().execute(() -> {
+//                            myWeekDao.insertAll(item);
+//                        });
+//                    }
+//                } else {
+//                    Log.e("WeekPlanRestore", "Error getting documents: ", task.getException());
+//                }
+//            });
+//        }
+//    }
 }

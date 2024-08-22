@@ -30,4 +30,11 @@ public interface WeeklyPlanMealDetailsDao {
 
     @Query("DELETE FROM weekly_plan_details WHERE idMeal = :id")
     void deleteMealById(String id);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertMany(WeeklyPlanMealDetails... meals);
+
+    @Query("DELETE FROM weekly_plan_details") // Replace with your table name
+    void deleteAll();
+
 }
