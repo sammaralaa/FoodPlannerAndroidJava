@@ -100,8 +100,15 @@ public class SearchFragment extends Fragment implements ISearchView {
 
     @Override
     public void searchResault(List<Meal> meals) {
-        adapter = new MealCardAdapter(this.getContext(),meals);
-        recyclerView.setAdapter(adapter);
+        if (meals != null) {
+            adapter = new MealCardAdapter(this.getContext(), meals);
+            recyclerView.setAdapter(adapter);
+
+        }
+        else{
+            Toast.makeText(this.getContext(), "search not found", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override

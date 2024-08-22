@@ -18,6 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidproject.R;
+import com.example.androidproject.database.MealDAO;
+import com.example.androidproject.database.Room;
+import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
+import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
+import com.example.androidproject.network.BackupUserData;
 import com.example.androidproject.view.home.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +38,10 @@ public class LoginFragment extends Fragment {
     FirebaseAuth auth;
     String TAG = "Firebase Auth";
     String name,pass;
+    WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao;
+    WeeklyPlanMealDao weeklyPlanMealDao;
+    MealDAO mealDAO;
+    BackupUserData backupUserData;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -41,6 +50,11 @@ public class LoginFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
+        mealDAO = Room.getInstance(this.getContext()).getMealDao();
+        weeklyPlanMealDao = Room.getInstance(this.getContext()).getWeeklyPlanMealDao();
+        weeklyPlanMealDetailsDao = Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao();
+        backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDao,weeklyPlanMealDetailsDao);
+        backupUserData.restoreDataFromFirestore();
         }
 
     @Override

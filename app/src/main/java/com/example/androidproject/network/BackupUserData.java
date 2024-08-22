@@ -27,9 +27,9 @@ public class BackupUserData {
     private final WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao;
     private final FirebaseAuth auth;
 
-    public BackupUserData(MealDAO myDao, WeeklyPlanMealDao myWeekDao,WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao) {
+    public BackupUserData(MealDAO mealDAO, WeeklyPlanMealDao myWeekDao,WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao) {
         firestore = FirebaseFirestore.getInstance();
-        this.mealDAO = myDao;
+        this.mealDAO = mealDAO;
         this.weeklyPlanMealDao = myWeekDao;
         this.weeklyPlanMealDetailsDao = weeklyPlanMealDetailsDao;
         auth = FirebaseAuth.getInstance();
@@ -132,48 +132,67 @@ public class BackupUserData {
             });
         }
     }
-//    public void restoreDataFromFirestore() {
-//        FirebaseUser user = auth.getCurrentUser();
-//        if (user != null) {
-//            String userId = user.getUid();
-//
-//            Executors.newSingleThreadExecutor().execute(mealDAO::clearTable);
-//
-//            CollectionReference collectionRef = firestore.collection("users")
-//                    .document(userId)
-//                    .collection("FavMeals");
-//
-//            collectionRef.get().addOnCompleteListener(task -> {
-//                if (task.isSuccessful()) {
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        Room item = document.toObject(Room.class);
-//                        Executors.newSingleThreadExecutor().execute(() -> {
-//                            mealDAO.insertMeal(item);
-//                        });
-//                    }
-//                } else {
-//                    Log.e("FavMealsRestore", "Error getting documents: ", task.getException());
-//                }
-//            });
-//
-//            Executors.newSingleThreadExecutor().execute(myWeekDao::clearTable);
-//
-//            CollectionReference collectionRefWeek = firestore.collection("users")
-//                    .document(userId)
-//                    .collection("WeekPlan");
-//
-//            collectionRefWeek.get().addOnCompleteListener(task -> {
-//                if (task.isSuccessful()) {
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        MealDBWeek item = document.toObject(MealDBWeek.class);
-//                        Executors.newSingleThreadExecutor().execute(() -> {
-//                            myWeekDao.insertAll(item);
-//                        });
-//                    }
-//                } else {
-//                    Log.e("WeekPlanRestore", "Error getting documents: ", task.getException());
-//                }
-//            });
-//        }
-//    }
+    public void restoreDataFromFirestore() {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
+
+            Executors.newSingleThreadExecutor().execute(mealDAO::deleteAll);
+
+            CollectionReference collectionRef = firestore.collection("users")
+                    .document(userId)
+                    .collection("FavMeals");
+
+            collectionRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Meal item = document.toObject(Meal.class);
+                        Executors.newSingleThreadExecutor().execute(() -> {
+                            mealDAO.insertMany(item);
+                        });
+                    }
+                } else {
+                    Log.e("FavMealsRestore", "Error getting documents: ", task.getException());
+                }
+            });
+
+            Executors.newSingleThreadExecutor().execute(weeklyPlanMealDao::deleteAll);
+
+            CollectionReference collectionRefWeek = firestore.collection("users")
+                    .document(userId)
+                    .collection("WeekPlan");
+
+            collectionRefWeek.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        WeeklyPlanMeal item = document.toObject(WeeklyPlanMeal.class);
+                        Executors.newSingleThreadExecutor().execute(() -> {
+                            weeklyPlanMealDao.insertMany(item);
+                        });
+                    }
+                } else {
+                    Log.e("WeekPlanRestore", "Error getting documents: ", task.getException());
+                }
+            });
+
+            Executors.newSingleThreadExecutor().execute(weeklyPlanMealDetailsDao::deleteAll);
+
+            CollectionReference collectionRefWeekDetails = firestore.collection("users")
+                    .document(userId)
+                    .collection("WeekPlanDetails");
+
+            collectionRefWeekDetails.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        WeeklyPlanMealDetails item = document.toObject(WeeklyPlanMealDetails.class);
+                        Executors.newSingleThreadExecutor().execute(() -> {
+                            weeklyPlanMealDetailsDao.insertMany(item);
+                        });
+                    }
+                } else {
+                    Log.e("WeekPlanRestore", "Error getting documents: ", task.getException());
+                }
+            });
+        }
+    }
 }

@@ -78,7 +78,7 @@ public class MealsRemoteDataSource {
             @Override
             public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
                 if(response.isSuccessful()){
-                    Log.i(TAG ,"onResponse: CallBack searchByCategory "+response.body().meals.size() );
+                    //Log.i(TAG ,"onResponse: CallBack searchByCategory "+response.body().meals.size() );
                     networkCallback.onSuccessResult(response.body().meals);
                     // networkCallback.onSuccessResult(response.body().getMeals());
                 }
