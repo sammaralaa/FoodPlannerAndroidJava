@@ -54,7 +54,7 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HomeFragmentDirections.ActionHomeFragmentToMealsOnCategoryFragment actin = HomeFragmentDirections.actionHomeFragmentToMealsOnCategoryFragment(category.getStrCategory());
+                HomeFragmentDirections.ActionHomeFragmentToMealsOnCategoryFragment actin = HomeFragmentDirections.actionHomeFragmentToMealsOnCategoryFragment(category.getStrCategory(),"category");
                 Navigation.findNavController(view).navigate(actin);
                 Log.i(TAG, "onClick: "+ category.getStrCategory());
             }

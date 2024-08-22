@@ -19,6 +19,10 @@ public class MealsInCategoryPresenter implements NetworkCallBack {
         mealsRemoteDataSource.searchByCategoryCall(this,category);
     }
 
+    public void getAllMealsOnCountry(String country){
+        mealsRemoteDataSource.searchByCountryCall(this,country);
+    }
+
     @Override
     public void onSuccessResult(List<Meal> meals) {
         iView.showMealsList(meals);

@@ -18,6 +18,7 @@ import com.example.androidproject.R;
 import com.example.androidproject.model.countriesModel.Country;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.view.category_card.CategoryCardAdapter;
+import com.example.androidproject.view.home.HomeFragmentDirections;
 import com.example.androidproject.view.meal_card.MealCardAdapter;
 
 import java.util.List;
@@ -48,6 +49,8 @@ public class CountryCardAdapter extends RecyclerView.Adapter<CountryCardAdapter.
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                HomeFragmentDirections.ActionHomeFragmentToMealsOnCategoryFragment actin = HomeFragmentDirections.actionHomeFragmentToMealsOnCategoryFragment(country.getOriginCountry(),"country");
+                Navigation.findNavController(view).navigate(actin);
 //                HomeFragmentDirections.ActionHomeFragmentToMealDetails3 actin = HomeFragmentDirections.actionHomeFragmentToMealDetails3(meal);
 //                Navigation.findNavController(view).navigate(actin);
 //                Log.i(TAG, "onClick: "+meal.getCategory());

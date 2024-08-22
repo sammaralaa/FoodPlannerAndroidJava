@@ -45,10 +45,16 @@ public class MealsInCategoryFragment extends Fragment implements IMealsInCategor
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        String categoryName = MealsInCategoryFragmentArgs.fromBundle(getArguments()).getCategoryName();
-
+        String Name = MealsInCategoryFragmentArgs.fromBundle(getArguments()).getName();
+        String Type = MealsInCategoryFragmentArgs.fromBundle(getArguments()).getType();
         presenter = new MealsInCategoryPresenter(this);
-        presenter.getAllMeals(categoryName);
+        if(Type.equals("category")){
+            presenter.getAllMeals(Name);
+        }
+        else if(Type.equals("country")){
+            presenter.getAllMealsOnCountry(Name);
+        }
+
         recyclerView = view.findViewById(R.id.CategoryMealsRecycler);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager2 =new LinearLayoutManager(view.getContext());

@@ -58,12 +58,15 @@
         android:name="com.example.androidproject.view.category_card.MealsInCategoryFragment"
         android:label="@string/meals"
         tools:layout="@layout/fragment_meals_in_category" >
-        <argument
-            android:name="CategoryName"
-            app:argType="string" />
         <action
             android:id="@+id/action_mealsOnCategoryFragment_to_mealDetails"
             app:destination="@id/mealDetails" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="type"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/planFragment"
