@@ -8,12 +8,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/planRecycler"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        tools:listitem="@layout/fragment_meal_on_plan_card"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/fragment_meal_on_plan_card" />
 </androidx.constraintlayout.widget.ConstraintLayout>

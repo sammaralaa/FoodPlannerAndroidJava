@@ -61,6 +61,7 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         WeeklyPlanMeal meal = values.get(position);
+        int size = values.size();
        holder.daytxt.setText(dateToDay(meal.getDate()));
         holder.datetxt.setText(meal.getDate());
         holder.typetxt.setText(meal.getMealType());
@@ -77,6 +78,7 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
             @Override
             public void onClick(View view) {
                 //action_planFragment_to_weeklyPlanMealDetailsFragment
+                Log.i(TAG, "onClick: " + meal.getMealName());
                 PlanFragmentDirections.ActionPlanFragmentToWeeklyPlanMealDetailsFragment action = PlanFragmentDirections.actionPlanFragmentToWeeklyPlanMealDetailsFragment(meal.getMealID());
                 Navigation.findNavController(view).navigate(action);
 //

@@ -81,7 +81,7 @@ public class MealsLocalDataSource {
         return weeklyPlanList;
     }
     public WeeklyPlanMealDetails getMealByID(String id) {
-        return null;
+        return weeklyPlanMealDetailsDao.getPlanMeal(id);
     }
     public void removeMealFromPlan(WeeklyPlanMeal meal ){
         new Thread(){

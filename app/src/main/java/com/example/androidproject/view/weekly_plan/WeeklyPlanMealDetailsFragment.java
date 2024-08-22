@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,11 @@ import java.util.List;
 
 
 public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPlanMealDetails {
+    private static final String TAG = "WeeklyPlanMealDetailsFragment";
     TextView name , category , area , instructions;
     ImageView img ;
     MealDetailsPresenter presenter;
-    Meal mealFull = new Meal();
+    WeeklyPlanMealDetails mealFull = new WeeklyPlanMealDetails();
 
     String video_id;
 
@@ -60,22 +62,35 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
         super.onViewCreated(view, savedInstanceState);
         String mealId = WeeklyPlanMealDetailsFragmentArgs.fromBundle(getArguments()).getMealId();
         presenter = new MealDetailsPresenter(this, MealsLocalDataSource.getInstance(this.getContext()));
-        //presenter.getMealLocal(mealId);
+        presenter.getMealLocal(mealId);
 
         name = view.findViewById(R.id.txtMealNamePlan);
         category = view.findViewById(R.id.txtMealCategoryPlan);
         area = view.findViewById(R.id.txtMealAreaPlan);
         instructions = view.findViewById(R.id.txtMealInstructionsPlan);
         img = view.findViewById(R.id.imgMealThumbPlan);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        name.setText(mealFull.getMealName());
+        category.setText(mealFull.getCategory());
+        area.setText(mealFull.getOriginCountry());
+        instructions.setText(mealFull.getInstructions());
+        Glide.with(this.getContext()).load(mealFull.getMealThumb()).into(img);
 
 
     }
 
     @Override
     public void getPlanMeal(WeeklyPlanMealDetails meals) {
-        name.setText(meals.getMealName());
-        category.setText(meals.getCategory());
-        area.setText(meals.getOriginCountry());
-        instructions.setText(meals.getInstructions());
-        Glide.with(this.getContext()).load(meals.getMealThumb()).into(img);    }
+        Log.i(TAG, "getPlanMeal: " + meals.getMealName());
+        mealFull = meals;
+//        name.setText(meals.getMealName());
+//        category.setText(meals.getCategory());
+//        area.setText(meals.getOriginCountry());
+//        instructions.setText(meals.getInstructions());
+//        Glide.with(this.getContext()).load(meals.getMealThumb()).into(img);
+        }
 }

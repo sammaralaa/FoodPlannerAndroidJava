@@ -50,11 +50,7 @@ public class LoginFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
-        mealDAO = Room.getInstance(this.getContext()).getMealDao();
-        weeklyPlanMealDao = Room.getInstance(this.getContext()).getWeeklyPlanMealDao();
-        weeklyPlanMealDetailsDao = Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao();
-        backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDao,weeklyPlanMealDetailsDao);
-        backupUserData.restoreDataFromFirestore();
+
         }
 
     @Override
@@ -80,6 +76,7 @@ public class LoginFragment extends Fragment {
 
                 }
                 else{
+
                     Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signUpFragment);
                 }
             }
@@ -97,6 +94,12 @@ public class LoginFragment extends Fragment {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = auth.getCurrentUser();
+                                    Log.i(TAG, "onComplete: "+user.getUid());
+                                    mealDAO = Room.getInstance(view.getContext()).getMealDao();
+                                    weeklyPlanMealDao = Room.getInstance(view.getContext()).getWeeklyPlanMealDao();
+                                    weeklyPlanMealDetailsDao = Room.getInstance(view.getContext()).getWeeklyPlanMealDetailsDao();
+                                    backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDao,weeklyPlanMealDetailsDao);
+                                    backupUserData.restoreDataFromFirestore();
                                     Intent intent = new Intent(view.getContext(), HomeActivity.class);
                                     startActivity(intent);
                                     getActivity().finish();

@@ -3,6 +3,7 @@ package com.example.androidproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +29,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 Intent intent;
                 if (currentUser != null) {
                     intent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+                    Log.i("FirebaseAuth", "run: splash " +currentUser.getUid() );
                 } else {
                     intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                 }

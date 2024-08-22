@@ -101,8 +101,7 @@ public class MealDetails extends Fragment implements IMealDetails {
             public void onClick(View view) {
                 if(user.isAnonymous()){
                     Toast.makeText(view.getContext(), "you need to login first", Toast.LENGTH_SHORT).show();
-                }
-                {
+                } else {
                     String mealType = mealTypeSpinner.getSelectedItem().toString();
                     //@NonNull String date, @NonNull String mealType, String dayOfWeek, String mealID, String mealName, String mealThump)
                     weeklyPlanMeal = new WeeklyPlanMeal(selectedDate, mealType, meal.getId(), meal.getMealName(), meal.getMealThumb());

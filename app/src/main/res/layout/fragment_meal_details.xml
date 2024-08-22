@@ -108,6 +108,21 @@
             android:layout_marginBottom="8dp">
 
             <TextView
+                android:id="@+id/igredientTitletxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredients"
+                android:textColor="@color/green"
+                android:textSize="23dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
                 android:id="@+id/txtTitleMealTags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -126,6 +141,462 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/txtTitleMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textSize="23dp"
+                android:textStyle="bold"
+                android:textColor="@color/green" />
+
+            <TextView
+                android:id="@+id/txtMealTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags Value"
+                android:textSize="20dp"
+                android:textColor="@color/lightBlack"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
         <!-- Meal Instructions Section -->
         <LinearLayout
             android:layout_width="match_parent"

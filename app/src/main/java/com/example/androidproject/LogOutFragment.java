@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,10 @@ public class LogOutFragment extends Fragment {
         super.onCreate(savedInstanceState);
         weeklyPlanMealDao = Room.getInstance(this.getContext()).getWeeklyPlanMealDao();
         weeklyPlanMealDetailsDao = Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao();
+        mealDAO = Room.getInstance(this.getContext()).getMealDao();
         backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDao,weeklyPlanMealDetailsDao);
         backupUserData.backupDataToFirestore();
-        firebaseAuthManager.logout();
+        Log.i("FirebaseAuth ", "onCreate: logOut "+firebaseAuthManager.getCurrentUser().getUid());
     }
 
     @Override
@@ -53,16 +55,20 @@ public class LogOutFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
                 // Start the MainActivity
 
-                Intent intent = new Intent(view.getContext(), MainActivity.class);
+
+        firebaseAuthManager.logout();
+
+
+        Intent intent = new Intent(view.getContext(), MainActivity.class);
                 startActivity(intent);
 
-            }
-        }, 3000);
+            //}
+        //}, 3000);
 
     }
 }

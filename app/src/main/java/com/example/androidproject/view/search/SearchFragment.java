@@ -83,7 +83,7 @@ public class SearchFragment extends Fragment implements ISearchView {
                 }else if(selected == ingrediantButton.getId()){
                     presenter.searchByIngrediant(query);
                 }else{
-
+                    Toast.makeText(getContext(), "Select type of Search", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }

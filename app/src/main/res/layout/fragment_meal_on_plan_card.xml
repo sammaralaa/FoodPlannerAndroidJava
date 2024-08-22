@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".view.weekly_plan.MealOnPlanCardFragment">
 
     <androidx.cardview.widget.CardView
@@ -12,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:clickable="true"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:clickable="true">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,16 +27,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:background="@color/lightGreen"
                 android:gravity="center_vertical"
-                android:background="@color/lightGreen">
+                android:orientation="horizontal">
 
                 <!-- Calendar Icon -->
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/calendar"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/calendar" />
 
                 <!-- Day of Week -->
                 <TextView
@@ -46,49 +45,48 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Monday"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <!-- Date -->
                 <TextView
                     android:id="@+id/dateText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="20/08/2024"
-                    android:textStyle="bold"
                     android:textSize="16sp"
-                    android:layout_marginStart="8dp"/>
+                    android:textStyle="bold" />
+
                 <ImageView
                     android:id="@+id/deleteMealPlan"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/delete"
                     android:layout_marginEnd="8dp"
                     android:clickable="true"
-                    />
+                    android:src="@drawable/delete" />
 
             </LinearLayout>
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                app:dividerColor="@color/green"/>
+                app:dividerColor="@color/green" />
 
             <!-- Meal Image and Name Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/pMealImg"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/account"
                     android:layout_weight="1"
-                     />
+                    android:src="@drawable/account" />
                 <!-- Meal Name -->
                 <TextView
                     android:id="@+id/pMealNametxt"
@@ -96,9 +94,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Paleo Jerk Chicken and Sweet Potatoes"
-                    android:textSize="20dp"
                     android:textColor="@color/green"
-                    />
+                    android:textSize="20dp" />
 
             </LinearLayout>
 
@@ -107,23 +104,22 @@
                 android:id="@+id/mealTypeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lunch"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:text="Lunch"
                 android:textColor="@color/green"
-                />
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
             <!-- Meal ID (Optional) -->
             <TextView
                 android:id="@+id/mealIDText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Meal ID: 12345"
                 android:textSize="14sp"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

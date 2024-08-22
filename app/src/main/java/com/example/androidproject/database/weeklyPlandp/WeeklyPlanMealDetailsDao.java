@@ -25,10 +25,10 @@ public interface WeeklyPlanMealDetailsDao {
     void deleteMeal(WeeklyPlanMealDetails meal);
 
     //idMeal
-    @Query("SELECT * FROM weekly_plan_details WHERE idMeal = :id LIMIT 1")
+    @Query("SELECT * FROM weekly_plan_details WHERE idMeal IN (:id)")
     WeeklyPlanMealDetails getPlanMeal(String id);
 
-    @Query("DELETE FROM weekly_plan_details WHERE idMeal = :id")
+    @Query("DELETE FROM weekly_plan_details WHERE idMeal  IN (:id)")
     void deleteMealById(String id);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

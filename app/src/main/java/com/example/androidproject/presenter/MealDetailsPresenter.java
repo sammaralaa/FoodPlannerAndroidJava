@@ -41,7 +41,12 @@ public class MealDetailsPresenter implements NetworkCallBack {
 
     }
     public void getMealLocal(String id){
-        iWeeklyPlanMealDetails.getPlanMeal( localDataSource.getMealByID(id));
+
+        new Thread(()->{
+            WeeklyPlanMealDetails  meal= localDataSource.getMealByID(id);
+            iWeeklyPlanMealDetails.getPlanMeal(meal);
+
+        }).start();
     }
     @Override
     public void onSuccessResult(List<Meal> meals) {

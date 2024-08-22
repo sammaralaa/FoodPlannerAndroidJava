@@ -45,7 +45,7 @@ public class BackupUserData {
             CollectionReference collectionRef = firestore.collection("users")
                     .document(userId)
                     .collection("FavMeals");
-
+            Log.i("FirebaseAuth", "backupDataToFirestore: " + userId);
             collectionRef.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     WriteBatch batch = firestore.batch();
@@ -118,8 +118,8 @@ public class BackupUserData {
                                 List<WeeklyPlanMealDetails> itemsWeek = weeklyPlanMealDetailsDao.getAllPlanMealsforBackup();
                                 for (WeeklyPlanMealDetails item : itemsWeek) {
                                     collectionRefWeek.document(item.idMeal).set(item)
-                                            .addOnSuccessListener(aVoid -> Log.d("WeekPlanBackup", "Data backed up successfully - Meal : " + item.idMeal))
-                                            .addOnFailureListener(e -> Log.e("WeekPlanBackup", "Error backing up data", e));
+                                            .addOnSuccessListener(aVoid -> Log.i("WeekPlanBackup", "Data backed up successfully - Meal : " + item.idMeal))
+                                            .addOnFailureListener(e -> Log.i("WeekPlanBackup", "Error backing up data", e));
                                 }
                             });
                         } else {
@@ -152,7 +152,7 @@ public class BackupUserData {
                         });
                     }
                 } else {
-                    Log.e("FavMealsRestore", "Error getting documents: ", task.getException());
+                    Log.i("FavMealsRestore", "Error getting documents: ", task.getException());
                 }
             });
 

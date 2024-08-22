@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -81,9 +82,10 @@ public class HomeFragment extends Fragment implements IMealCard {
         presenter.listAllCountries();
         recyclerViewCountry = view.findViewById(R.id.countriesRecycler);
         recyclerViewCountry.setHasFixedSize(true);
-        LinearLayoutManager layoutManagerCountry =new LinearLayoutManager(view.getContext());
-        layoutManagerCountry.setOrientation(RecyclerView.HORIZONTAL);
-        recyclerViewCountry.setLayoutManager(layoutManagerCountry);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(),2,RecyclerView.VERTICAL,false);
+        //LinearLayoutManager layoutManagerCountry =new LinearLayoutManager(view.getContext());
+        //layoutManagerCountry.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerViewCountry.setLayoutManager(gridLayoutManager);
         recyclerViewCountry.setVisibility(View.VISIBLE);
 
         countryCardAdapter = new CountryCardAdapter(view.getContext(),new ArrayList<>());
