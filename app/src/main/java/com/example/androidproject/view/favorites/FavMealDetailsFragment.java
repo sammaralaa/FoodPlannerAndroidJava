@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,12 +25,15 @@ import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.presenter.MealDetailsPresenter;
+import com.example.androidproject.view.ingrediants.IngredientList;
+import com.example.androidproject.view.ingrediants.IngredientsAdapter;
 import com.example.androidproject.view.mealDetails.IMealDetails;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -43,6 +48,8 @@ public class FavMealDetailsFragment extends Fragment implements IMealDetails {
     Button RemoveFromFav , addToPlan;
     Spinner mealTypeSpinner;
     String selectedDate;
+    RecyclerView recyclerView;
+    IngredientsAdapter ingredientsAdapter;
     public FavMealDetailsFragment() {
         // Required empty public constructor
     }
@@ -76,11 +83,27 @@ public class FavMealDetailsFragment extends Fragment implements IMealDetails {
         addToPlan = view.findViewById(R.id.addToPlanBtnFav);
         mealTypeSpinner = view.findViewById(R.id.spinnerDayOfWeekFav);
         datePicker = view.findViewById(R.id.calendar_iconFav);
+
+        recyclerView = view.findViewById(R.id.FavingrediantsRecycler);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager3 =new LinearLayoutManager(view.getContext());
+        layoutManager3.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager3);
+        recyclerView.setVisibility(View.VISIBLE);
+        ingredientsAdapter=new IngredientsAdapter(this.getContext(),new ArrayList<>());
+        recyclerView.setAdapter(ingredientsAdapter);
+
+
         Glide.with(view.getContext()).load(meal.getMealThumb()).into(img);
         name.setText(meal.getMealName());
         category.setText(meal.getCategory());
         area.setText(meal.getOriginCountry());
+        Log.i("ingredient", "onViewCreated: " + meal.strIngredient1);
+        IngredientList ingredientList = new IngredientList(meal);
+        ingredientsAdapter=new IngredientsAdapter(this.getContext(),ingredientList.ingredients);
+        recyclerView.setAdapter(ingredientsAdapter);
         instructions.setText(meal.getInstructions());
+
         video_id = extractVideoId(meal.getMealVideo());
         addToPlan.setOnClickListener(new View.OnClickListener() {
             @Override

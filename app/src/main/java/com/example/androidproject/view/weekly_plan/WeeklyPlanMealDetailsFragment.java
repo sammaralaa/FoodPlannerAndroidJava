@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,8 +25,11 @@ import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.presenter.MealDetailsPresenter;
+import com.example.androidproject.view.ingrediants.IngredientList;
+import com.example.androidproject.view.ingrediants.IngredientsAdapter;
 import com.example.androidproject.view.mealDetails.MealDetailsArgs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,9 +39,9 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
     ImageView img ;
     MealDetailsPresenter presenter;
     WeeklyPlanMealDetails mealFull = new WeeklyPlanMealDetails();
-
+    RecyclerView recyclerView;
     String video_id;
-
+    IngredientsAdapter ingredientsAdapter;
 
 
     public WeeklyPlanMealDetailsFragment() {
@@ -69,6 +74,17 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
         area = view.findViewById(R.id.txtMealAreaPlan);
         instructions = view.findViewById(R.id.txtMealInstructionsPlan);
         img = view.findViewById(R.id.imgMealThumbPlan);
+
+        recyclerView = view.findViewById(R.id.planingrediantsRecycler);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager3 =new LinearLayoutManager(view.getContext());
+        layoutManager3.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager3);
+        recyclerView.setVisibility(View.VISIBLE);
+
+        ingredientsAdapter=new IngredientsAdapter(this.getContext(),new ArrayList<>());
+        recyclerView.setAdapter(ingredientsAdapter);
+
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -80,7 +96,9 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
         instructions.setText(mealFull.getInstructions());
         Glide.with(this.getContext()).load(mealFull.getMealThumb()).into(img);
 
-
+        IngredientList ingredientList = new IngredientList(mealFull);
+        ingredientsAdapter=new IngredientsAdapter(this.getContext(),ingredientList.ingredients);
+        recyclerView.setAdapter(ingredientsAdapter);
     }
 
     @Override
