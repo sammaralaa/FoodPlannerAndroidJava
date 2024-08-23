@@ -1,12 +1,18 @@
 package com.example.androidproject.network;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.androidproject.view.welcom.IWelcom;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -18,6 +24,8 @@ public class FirebaseAuthManager {
     private FirebaseAuth mAuth;
     private Activity activity;
     IWelcom iWelcom;
+    private static final int RC_SIGN_IN = 9001;
+    private GoogleSignInClient googleSignInClient;
     public FirebaseAuthManager(Activity activity,IWelcom iWelcom) {
         this.mAuth = FirebaseAuth.getInstance();
         this.activity = activity;
@@ -93,11 +101,39 @@ public class FirebaseAuthManager {
                 });
     }
 
+    private void signIn() {
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    //محتاجه اكتفيتي :""""")
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            try {
+                GoogleSignInAccount account = GoogleSignIn.getSignedInAccountFromIntent(data).getResult(ApiException.class);
+                if (account != null && account.getIdToken() != null) {
+                    firebaseAuthWithGoogle(account.getIdToken());
+                } else {
+                    Log.w(TAG, "Google sign in failed: null token");
+                    Toast.makeText(activity.getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                Log.w(TAG, "Google sign in failed", e);
+                Toast.makeText(activity.getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
     // Logout
     public void logout() {
         mAuth.signOut();
         //Toast.makeText(activity, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
     }
+
 
     // Get current user
     public FirebaseUser getCurrentUser() {

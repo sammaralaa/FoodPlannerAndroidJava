@@ -73,4 +73,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-firestore:25.0.0")
     implementation ("com.jakewharton.threetenabp:threetenabp:1.4.4")
 
+    implementation ("com.google.android.gms:play-services-auth:20.7.0")
+
+
 }

@@ -29,6 +29,9 @@
             app:destination="@id/mealsOnCategoryFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_connectioLostFragment"
+            app:destination="@id/connectioLostFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -122,4 +125,9 @@
         android:name="com.example.androidproject.view.login_sign.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/connectioLostFragment"
+        android:name="com.example.androidproject.ConnectioLostFragment"
+        android:label="fragment_connectio_lost"
+        tools:layout="@layout/fragment_connectio_lost" />
 </navigation>

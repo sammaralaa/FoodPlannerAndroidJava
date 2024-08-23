@@ -44,7 +44,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Monday"
+                    android:text="@string/monday"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -92,7 +92,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="Paleo Jerk Chicken and Sweet Potatoes"
                     android:textColor="@color/green"
                     android:textSize="20dp" />
 
@@ -105,20 +104,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                android:text="Lunch"
+                android:text="@string/lunch"
                 android:textColor="@color/green"
                 android:textSize="25dp"
                 android:textStyle="bold" />
-
-            <!-- Meal ID (Optional) -->
-            <TextView
-                android:id="@+id/mealIDText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Meal ID: 12345"
-                android:textSize="14sp"
-                android:visibility="gone" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

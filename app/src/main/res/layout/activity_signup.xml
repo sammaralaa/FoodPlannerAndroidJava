@@ -14,7 +14,6 @@
         app:lottie_rawRes="@raw/animation"
         app:lottie_autoPlay="true"
         android:layout_width="match_parent"
-        android:backgroundTint="@color/lightGray"
         android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,11 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:inputType="textPersonName"
+            android:hint="User Name"
+            android:textColor="@android:color/black"
             android:background="@android:color/transparent"
-            android:hint="@string/UserName"
             android:padding="8dp"
-            android:textColor="@android:color/black" />
+            />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linearEmail"
@@ -94,11 +93,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:hint="Email"
+            android:textColor="@android:color/black"
             android:background="@android:color/transparent"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
             android:padding="8dp"
-            android:textColor="@android:color/black" />
+            />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linearPass2"
@@ -127,11 +126,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:hint="Password"
+            android:textColor="@android:color/black"
             android:background="@android:color/transparent"
-            android:hint="@string/password"
-            android:inputType="textPassword"
             android:padding="8dp"
-            android:textColor="@android:color/black" />
+            android:inputType="textPassword"/>
     </LinearLayout>
 
     <Button
@@ -145,11 +144,7 @@
         app:layout_constraintStart_toStartOf="@id/linearPass2"
         app:layout_constraintTop_toBottomOf="@id/linearPass2" />
 
-
-
-
-
-        />
+    />
     <ImageView
         android:id="@+id/signupWithG"
         android:layout_width="60dp"
