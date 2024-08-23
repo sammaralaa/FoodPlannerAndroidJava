@@ -1,6 +1,7 @@
 package com.example.androidproject.view.home;
 
 
+import android.app.Dialog;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -100,9 +101,6 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
             String id = savedInstanceState.getString("mealID");
             presenter.getMealById(id);
             Log.i("not null", "onViewCreated: " + id);
-        }else{
-            presenter.getRandomMeal();
-            Log.i("TAG", "onViewCreated: saved null");
         }
     }
 
@@ -129,15 +127,9 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
         if (savedTime == 0) {
             saveCurrentTimeToPreferences();
         }
-        if(savedInstanceState != null){
-            String id = savedInstanceState.getString("mealID");
-            presenter.getMealById(id);
-            Log.i("not null", "onViewCreated: " + id);
-        }else{
-            //presenter.getRandomMeal();
-            getMealOfDay(savedTime,RandomMealID);
-            Log.i("TAG", "onViewCreated: saved null");
-        }
+
+        // Call to check if the meal of the day should be fetched or kept from the previous day
+        getMealOfDay(savedTime, RandomMealID);
         recyclerViewRandom = view.findViewById(R.id.cardRecyclerRandom);
         recyclerViewRandom.setHasFixedSize(true);
         LinearLayoutManager layoutManager2 =new LinearLayoutManager(view.getContext());
@@ -241,10 +233,14 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
     }
 
     private void getMealOfDay(long savedTime,String id) {
-        boolean isOld = System.currentTimeMillis() - savedTime < TimeUnit.DAYS.toMillis(1);
-        if (isOld && (!id.isEmpty())) {
+        long currentTime = System.currentTimeMillis();
+        boolean isSameDay = (currentTime - savedTime) < TimeUnit.DAYS.toMillis(1);
+
+        if (isSameDay && !id.isEmpty()) {
+            // If the saved time is less than a day old and the ID is not empty, use the saved ID
             presenter.getMealById(id);
         } else {
+            // Otherwise, get a new random meal and save it
             presenter.getRandomMeal();
             saveCurrentTimeToPreferences();
         }
@@ -255,8 +251,7 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
         if(isConnected == false){
             Log.i("TAG", "onChangeConnection: lost");
             Toast.makeText(this.getContext(),"Connection lost",Toast.LENGTH_LONG);
-            Navigation.findNavController(this.getView()).navigate(R.id.action_homeFragment_to_connectioLostFragment);
-
+            Navigation.findNavController(this.getView()).navigate(R.id.action_homeFragment_to_favoriteFragment);
         }else{
             Toast.makeText(this.getContext(),"Back Online",Toast.LENGTH_LONG);
         }

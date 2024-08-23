@@ -29,6 +29,9 @@ public class WeeklyPlanMeal {
         this.mealName = mealName;
         this.mealThump = mealThump;
     }
+    public WeeklyPlanMeal(){
+
+    }
 
     @NonNull
     public String getDate() {

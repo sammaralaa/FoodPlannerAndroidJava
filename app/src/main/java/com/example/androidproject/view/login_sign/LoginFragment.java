@@ -23,6 +23,7 @@ import com.example.androidproject.database.Room;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
 import com.example.androidproject.network.BackupUserData;
+import com.example.androidproject.view.SignupActivity;
 import com.example.androidproject.view.home.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,15 +71,16 @@ public class LoginFragment extends Fragment {
         textView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
-                if (auth.getCurrentUser().isAnonymous()){
-                    Navigation.findNavController(view).navigate(R.id.action_loginFragment2_to_signUpFragment2);
-
-                }
-                else{
-
-                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signUpFragment);
-                }
+                Intent intent = new Intent(view.getContext(), SignupActivity.class);
+                startActivity(intent);
+//                if (auth.getCurrentUser().isAnonymous()){
+//                    Navigation.findNavController(view).navigate(R.id.action_loginFragment2_to_signUpFragment2);
+//
+//                }
+//                else{
+//
+//                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signUpFragment);
+//                }
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {

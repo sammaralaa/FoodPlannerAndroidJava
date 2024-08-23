@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.androidproject.R;
 import com.example.androidproject.network.FirebaseAuthManager;
 import com.example.androidproject.presenter.welcomScreenPresenter;
+import com.example.androidproject.view.SignupActivity;
 import com.example.androidproject.view.home.HomeActivity;
 
 
@@ -61,8 +62,9 @@ public class WelcomeScreenFragment extends Fragment implements IWelcom {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_welcomeScreenFragment_to_signUpFragment);
-
+                //Navigation.findNavController(view).navigate(R.id.action_welcomeScreenFragment_to_signUpFragment);
+                Intent intent = new Intent(view.getContext(), SignupActivity.class);
+                startActivity(intent);
             }
         });
 

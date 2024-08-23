@@ -28,6 +28,10 @@ import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.view.ingrediants.IngredientList;
 import com.example.androidproject.view.ingrediants.IngredientsAdapter;
 import com.example.androidproject.view.mealDetails.MealDetailsArgs;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,20 +99,52 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
         area.setText(mealFull.getOriginCountry());
         instructions.setText(mealFull.getInstructions());
         Glide.with(this.getContext()).load(mealFull.getMealThumb()).into(img);
+        video_id = extractVideoId(mealFull.getMealVideo());
 
         IngredientList ingredientList = new IngredientList(mealFull);
         ingredientsAdapter=new IngredientsAdapter(this.getContext(),ingredientList.ingredients);
         recyclerView.setAdapter(ingredientsAdapter);
+
+        final YouTubePlayerView youTubePlayerView = view.findViewById(R.id.youtubePlayerViewPlan);
+
+        // here we are adding observer to our youtubeplayerview.
+        getLifecycle().addObserver(youTubePlayerView);
+
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                // loading the selected video into the YouTube Player
+                youTubePlayer.loadVideo(video_id, 0);
+            }
+
+            @Override
+            public void onStateChange(@NonNull YouTubePlayer youTubePlayer, @NonNull PlayerConstants.PlayerState state) {
+                // this method is called if video has ended,
+                super.onStateChange(youTubePlayer, state);
+            }
+        });
     }
 
     @Override
     public void getPlanMeal(WeeklyPlanMealDetails meals) {
         Log.i(TAG, "getPlanMeal: " + meals.getMealName());
         mealFull = meals;
-//        name.setText(meals.getMealName());
-//        category.setText(meals.getCategory());
-//        area.setText(meals.getOriginCountry());
-//        instructions.setText(meals.getInstructions());
-//        Glide.with(this.getContext()).load(meals.getMealThumb()).into(img);
+
         }
+
+    public static String extractVideoId(String url) {
+        String videoId = null;
+
+        if (url != null && url.contains("v=")) {
+            int index = url.indexOf("v=") + 2;
+            videoId = url.substring(index);
+
+            int ampersandIndex = videoId.indexOf("&");
+            if (ampersandIndex != -1) {
+                videoId = videoId.substring(0, ampersandIndex);
+            }
+        }
+
+        return videoId;
+    }
 }

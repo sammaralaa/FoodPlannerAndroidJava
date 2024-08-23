@@ -102,30 +102,30 @@ public class FirebaseAuthManager {
     }
 
     private void signIn() {
-        Intent signInIntent = googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+//        Intent signInIntent = googleSignInClient.getSignInIntent();
+//        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    //محتاجه اكتفيتي :""""")
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            try {
-                GoogleSignInAccount account = GoogleSignIn.getSignedInAccountFromIntent(data).getResult(ApiException.class);
-                if (account != null && account.getIdToken() != null) {
-                    firebaseAuthWithGoogle(account.getIdToken());
-                } else {
-                    Log.w(TAG, "Google sign in failed: null token");
-                    Toast.makeText(activity.getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-                Log.w(TAG, "Google sign in failed", e);
-                Toast.makeText(activity.getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+//    //محتاجه اكتفيتي :""""")
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == RC_SIGN_IN) {
+//            try {
+//                GoogleSignInAccount account = GoogleSignIn.getSignedInAccountFromIntent(data).getResult(ApiException.class);
+//                if (account != null && account.getIdToken() != null) {
+//                    firebaseAuthWithGoogle(account.getIdToken());
+//                } else {
+//                    Log.w(TAG, "Google sign in failed: null token");
+//                    Toast.makeText(activity.getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+//                }
+//            } catch (Exception e) {
+//                Log.w(TAG, "Google sign in failed", e);
+//                Toast.makeText(activity.getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
 
 
     // Logout

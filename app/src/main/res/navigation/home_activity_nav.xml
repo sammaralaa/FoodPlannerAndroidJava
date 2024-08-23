@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_homeFragment_to_connectioLostFragment"
             app:destination="@id/connectioLostFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"

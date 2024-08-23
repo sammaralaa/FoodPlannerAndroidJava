@@ -42,7 +42,7 @@ public class LogOutFragment extends Fragment {
         mealDAO = Room.getInstance(this.getContext()).getMealDao();
         backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDao,weeklyPlanMealDetailsDao);
         backupUserData.backupDataToFirestore();
-        Log.i("FirebaseAuth ", "onCreate: logOut "+firebaseAuthManager.getCurrentUser().getUid());
+        //Log.i("FirebaseAuth ", "onCreate: logOut "+firebaseAuthManager.getCurrentUser().getUid());
     }
 
     @Override

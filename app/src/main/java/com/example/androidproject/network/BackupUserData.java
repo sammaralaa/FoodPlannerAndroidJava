@@ -63,11 +63,11 @@ public class BackupUserData {
                                 }
                             });
                         } else {
-                            Log.e("FavMealsBackup", "Error deleting old data", deleteTask.getException());
+                            Log.i("FavMealsBackup", "Error deleting old data", deleteTask.getException());
                         }
                     });
                 } else {
-                    Log.e("FavMealsBackup", "Error getting documents for deletion: ", task.getException());
+                    Log.i("FavMealsBackup", "Error getting documents for deletion: ", task.getException());
                 }
             });
 
@@ -88,16 +88,16 @@ public class BackupUserData {
                                 List<WeeklyPlanMeal> itemsWeek = weeklyPlanMealDao.getAllPlanMealsforBackup();
                                 for (WeeklyPlanMeal item : itemsWeek) {
                                     collectionRefForWeekPlan.document(item.getMealID()).set(item)
-                                            .addOnSuccessListener(aVoid -> Log.d("WeekPlanBackup", "Data backed up successfully - Meal : " + item.getMealID()))
-                                            .addOnFailureListener(e -> Log.e("WeekPlanBackup", "Error backing up data", e));
+                                            .addOnSuccessListener(aVoid -> Log.i("WeekPlanBackup", "Data backed up successfully - Meal : " + item.getMealID()))
+                                            .addOnFailureListener(e -> Log.i("WeekPlanBackup", "Error backing up data", e));
                                 }
                             });
                         } else {
-                            Log.e("WeekPlanBackup", "Error deleting old data", deleteTask.getException());
+                            Log.i("WeekPlanBackup", "Error deleting old data", deleteTask.getException());
                         }
                     });
                 } else {
-                    Log.e("WeekPlanBackup", "Error getting documents for deletion: ", task.getException());
+                    Log.i("WeekPlanBackup", "Error getting documents for deletion: ", task.getException());
                 }
             });
 
@@ -123,11 +123,11 @@ public class BackupUserData {
                                 }
                             });
                         } else {
-                            Log.e("WeekPlanBackup", "Error deleting old data", deleteTask.getException());
+                            Log.i("WeekPlanBackup", "Error deleting old data", deleteTask.getException());
                         }
                     });
                 } else {
-                    Log.e("WeekPlanBackup", "Error getting documents for deletion: ", task.getException());
+                    Log.i("WeekPlanBackup", "Error getting documents for deletion: ", task.getException());
                 }
             });
         }
@@ -152,7 +152,7 @@ public class BackupUserData {
                         });
                     }
                 } else {
-                    Log.i("FavMealsRestore", "Error getting documents: ", task.getException());
+                    Log.i("FavMealsRestore", "Error getting documents: FavMeals", task.getException());
                 }
             });
 
@@ -171,7 +171,7 @@ public class BackupUserData {
                         });
                     }
                 } else {
-                    Log.e("WeekPlanRestore", "Error getting documents: ", task.getException());
+                    Log.i("WeekPlanRestore", "Error getting documents: WeekPlan", task.getException());
                 }
             });
 
@@ -190,7 +190,7 @@ public class BackupUserData {
                         });
                     }
                 } else {
-                    Log.e("WeekPlanRestore", "Error getting documents: ", task.getException());
+                    Log.i("WeekPlanRestore", "Error getting documents: WeekPlanDetails", task.getException());
                 }
             });
         }
