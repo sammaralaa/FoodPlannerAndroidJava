@@ -28,10 +28,9 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
     private List<Category> values;
     private static final String TAG = "ViewHolder Category";
 
-    public CategoryCardAdapter(Context context,List<Category> data/*,OnProductClickListener*/){
+    public CategoryCardAdapter(Context context,List<Category> data){
         values=data;
         this.context=context;
-        //this.listener = listener
     }
 
     @NonNull

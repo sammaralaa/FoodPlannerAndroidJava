@@ -40,6 +40,9 @@ public class HomePresenter implements NetworkCallBack , NetworkCallBackCategory 
     public void listAllCountries(){
         mealsRemoteDataSource.makeNetworkCall(this);
     }
+    public void getMealById(String id){
+        mealsRemoteDataSource.getMealByIdCall(this,id);
+    }
     @Override
     public void onSuccessResult(List<Meal> meals) {
         if(meals.size()==1){

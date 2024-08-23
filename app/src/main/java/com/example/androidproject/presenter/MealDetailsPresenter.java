@@ -8,7 +8,9 @@ import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.network.NetworkCallBack;
+import com.example.androidproject.view.favorites.OnFavClickListener;
 import com.example.androidproject.view.mealDetails.IMealDetails;
+import com.example.androidproject.view.meal_card.IMealCard;
 import com.example.androidproject.view.weekly_plan.IWeeklyPlanMealDetails;
 
 import java.util.List;
@@ -18,8 +20,8 @@ public class MealDetailsPresenter implements NetworkCallBack {
     private IMealDetails iView;
     private MealsRemoteDataSource mealsRemoteDataSource = MealsRemoteDataSource.getInstance();
     private MealsLocalDataSource localDataSource;
-    IWeeklyPlanMealDetails iWeeklyPlanMealDetails;
-
+    private IWeeklyPlanMealDetails iWeeklyPlanMealDetails;
+    private IMealCard iMealCard;
 
     public MealDetailsPresenter(IMealDetails iView , MealsLocalDataSource localDataSource){
         this.iView = iView;
@@ -28,6 +30,10 @@ public class MealDetailsPresenter implements NetworkCallBack {
     public MealDetailsPresenter(IWeeklyPlanMealDetails iView , MealsLocalDataSource localDataSource){
         iWeeklyPlanMealDetails = iView;
         this.localDataSource=localDataSource;
+    }
+    public MealDetailsPresenter(IMealCard iview, MealsLocalDataSource mealsLocalDataSource){
+        this.iMealCard=iview;
+        this.localDataSource=mealsLocalDataSource;
     }
     public void getMealByID(String id){
         mealsRemoteDataSource.getMealByIdCall(this,id);

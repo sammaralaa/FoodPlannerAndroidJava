@@ -1,4 +1,4 @@
-package com.example.androidproject;
+package com.example.androidproject.view.welcom;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.androidproject.R;
 import com.example.androidproject.view.home.HomeActivity;
 import com.example.androidproject.view.login_sign.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;

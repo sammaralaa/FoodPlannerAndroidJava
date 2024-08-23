@@ -62,9 +62,8 @@
                     android:id="@+id/deleteMealPlan"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_marginEnd="8dp"
                     android:clickable="true"
-                    android:src="@drawable/delete" />
+                    android:src="@drawable/remove" />
 
             </LinearLayout>
 

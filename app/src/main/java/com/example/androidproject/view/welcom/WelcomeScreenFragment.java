@@ -1,4 +1,4 @@
-package com.example.androidproject;
+package com.example.androidproject.view.welcom;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.androidproject.R;
 import com.example.androidproject.network.FirebaseAuthManager;
 import com.example.androidproject.presenter.welcomScreenPresenter;
 import com.example.androidproject.view.home.HomeActivity;

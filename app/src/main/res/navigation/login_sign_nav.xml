@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeScreenFragment"
-        android:name="com.example.androidproject.WelcomeScreenFragment"
+        android:name="com.example.androidproject.view.welcom.WelcomeScreenFragment"
         android:label="Welcom"
         tools:layout="@layout/fragment_welcome_screen">
         <action

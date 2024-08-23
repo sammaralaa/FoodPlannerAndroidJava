@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.androidproject.R;
 import com.example.androidproject.model.mealsModel.Meal;
+import com.example.androidproject.view.favorites.OnFavClickListener;
 import com.example.androidproject.view.meal_card.MealCardAdapter;
 
 import java.util.List;
@@ -25,12 +26,12 @@ public class MealsInCategoryAdapter extends RecyclerView.Adapter<MealsInCategory
     private final Context context;
     private List<Meal> values;
     private static final String TAG = "ViewHolder";
+    private OnCategoryFavListener listener;
 
-    //OnProductsClickListener listener;
-    public MealsInCategoryAdapter(Context context,List<Meal> data/*,OnProductClickListener*/){
+    public MealsInCategoryAdapter(Context context, List<Meal> data, OnCategoryFavListener listener){
         values=data;
         this.context=context;
-        //this.listener = listener
+        this.listener = listener;
     }
 
 
@@ -53,7 +54,7 @@ public class MealsInCategoryAdapter extends RecyclerView.Adapter<MealsInCategory
         holder.addToFavImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                listener.onFaveMealClick(meal);
             }
         });
         holder.card.setOnClickListener(new View.OnClickListener() {
