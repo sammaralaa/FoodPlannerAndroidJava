@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.example.androidproject.database.Room;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
 import com.example.androidproject.network.BackupUserData;
-import com.example.androidproject.view.SignupActivity;
 import com.example.androidproject.view.home.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -73,14 +71,6 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), SignupActivity.class);
                 startActivity(intent);
-//                if (auth.getCurrentUser().isAnonymous()){
-//                    Navigation.findNavController(view).navigate(R.id.action_loginFragment2_to_signUpFragment2);
-//
-//                }
-//                else{
-//
-//                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signUpFragment);
-//                }
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -88,33 +78,37 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 name = String.valueOf(editName.getText());
                 pass = String.valueOf(editPass.getText());
-                auth.signInWithEmailAndPassword(name, pass)
-                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
-                                    FirebaseUser user = auth.getCurrentUser();
-                                    Log.i(TAG, "onComplete: "+user.getUid());
-                                    mealDAO = Room.getInstance(view.getContext()).getMealDao();
-                                    weeklyPlanMealDao = Room.getInstance(view.getContext()).getWeeklyPlanMealDao();
-                                    weeklyPlanMealDetailsDao = Room.getInstance(view.getContext()).getWeeklyPlanMealDetailsDao();
-                                    backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDao,weeklyPlanMealDetailsDao);
-                                    backupUserData.restoreDataFromFirestore();
-                                    Intent intent = new Intent(view.getContext(), HomeActivity.class);
-                                    startActivity(intent);
-                                    getActivity().finish();
-                                    //updateUI(user);
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(view.getContext(), "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    //updateUI(null);
+                if(name.isEmpty() || pass.isEmpty()){
+                    Toast.makeText(view.getContext(),"please fill empty feilds",Toast.LENGTH_SHORT);
+                }else {
+                    auth.signInWithEmailAndPassword(name, pass)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithEmail:success");
+                                        FirebaseUser user = auth.getCurrentUser();
+                                        Log.i(TAG, "onComplete: " + user.getUid());
+                                        mealDAO = Room.getInstance(view.getContext()).getMealDao();
+                                        weeklyPlanMealDao = Room.getInstance(view.getContext()).getWeeklyPlanMealDao();
+                                        weeklyPlanMealDetailsDao = Room.getInstance(view.getContext()).getWeeklyPlanMealDetailsDao();
+                                        backupUserData = new BackupUserData(mealDAO, weeklyPlanMealDao, weeklyPlanMealDetailsDao);
+                                        backupUserData.restoreDataFromFirestore();
+                                        Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                                        startActivity(intent);
+                                        getActivity().finish();
+                                        //updateUI(user);
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(view.getContext(), "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        //updateUI(null);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
     }

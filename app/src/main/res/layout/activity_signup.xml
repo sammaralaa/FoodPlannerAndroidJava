@@ -59,11 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:hint="User Name"
-            android:textColor="@android:color/black"
             android:background="@android:color/transparent"
+            android:hint="@string/UserName"
+            android:maxLines="1"
             android:padding="8dp"
-            />
+            android:textColor="@android:color/black" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linearEmail"
@@ -93,11 +93,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:hint="Email"
-            android:textColor="@android:color/black"
             android:background="@android:color/transparent"
+            android:hint="@string/email"
+            android:maxLines="1"
             android:padding="8dp"
-            />
+            android:textColor="@android:color/black" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linearPass2"
@@ -126,11 +126,46 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:hint="Password"
-            android:textColor="@android:color/black"
             android:background="@android:color/transparent"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
             android:padding="8dp"
-            android:inputType="textPassword"/>
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearPass3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@drawable/rounded_corners"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearPass2"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/pass" />
+
+        <EditText
+            android:id="@+id/passwordEditText3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="@string/confirmPassword"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
     <Button
@@ -140,9 +175,9 @@
         android:layout_marginTop="30dp"
         android:text="@string/signup"
         android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="@id/linearPass2"
-        app:layout_constraintStart_toStartOf="@id/linearPass2"
-        app:layout_constraintTop_toBottomOf="@id/linearPass2" />
+        app:layout_constraintEnd_toEndOf="@id/linearPass3"
+        app:layout_constraintStart_toStartOf="@id/linearPass3"
+        app:layout_constraintTop_toBottomOf="@id/linearPass3" />
 
     />
     <ImageView
@@ -151,6 +186,7 @@
         android:layout_height="60dp"
         android:src="@drawable/account"
         android:clickable="true"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/btnSignup"
         app:layout_constraintStart_toStartOf="@id/btnSignup"
         />

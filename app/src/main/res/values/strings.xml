@@ -41,6 +41,7 @@
     <string name="email">Email</string>
     <string name="UserName">User Name</string>
     <string name="password">Password</string>
+    <string name="confirmPassword">Confirm password</string>
 
     <string-array name="days_of_week">
         <item>Breakfast</item>

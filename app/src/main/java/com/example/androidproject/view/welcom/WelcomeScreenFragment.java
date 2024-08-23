@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.androidproject.R;
 import com.example.androidproject.network.FirebaseAuthManager;
 import com.example.androidproject.presenter.welcomScreenPresenter;
-import com.example.androidproject.view.SignupActivity;
+import com.example.androidproject.view.login_sign.SignupActivity;
 import com.example.androidproject.view.home.HomeActivity;
 
 

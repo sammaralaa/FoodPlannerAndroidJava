@@ -34,6 +34,7 @@ public class HomeActivity extends AppCompatActivity implements ConnectionCheckLi
     NavigationView navigationView;
     FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
     ConnectionCheck connectionCheck;
+    NavController navController;
     MenuItem PlanItem ,loginItem,logoutItem,homeItem,searchItem;
     boolean isfirst = true;
     FirebaseUser user;
@@ -62,7 +63,7 @@ public class HomeActivity extends AppCompatActivity implements ConnectionCheckLi
         //NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
         //NavigationUI.setupWithNavController(navigationView,navController);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        NavController navController = navHostFragment.getNavController();
+         navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(navigationView, navController);
         Menu menu = navigationView.getMenu();
         MenuItem favItem = menu.findItem(R.id.favoriteFragment);
@@ -108,6 +109,8 @@ public class HomeActivity extends AppCompatActivity implements ConnectionCheckLi
         }
         return super.onOptionsItemSelected(item);
     }
+
+
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -123,7 +126,7 @@ public class HomeActivity extends AppCompatActivity implements ConnectionCheckLi
            // Toast.makeText(this, "Internet state changed", Toast.LENGTH_SHORT).show();
             if(!isConnected){
                 Toast.makeText(this, "Connection lost", Toast.LENGTH_SHORT).show();
-                //Navigation.findNavController(this.navigationView).navigate(R.id.favoriteFragment);
+                //navController.navigate(R.id.favoriteFragment);
 
                 homeItem.setVisible(false);
                 searchItem.setVisible(false);
@@ -131,6 +134,7 @@ public class HomeActivity extends AppCompatActivity implements ConnectionCheckLi
                 logoutItem.setVisible(false);
             }else{
                 Toast.makeText(this, "Back online", Toast.LENGTH_SHORT).show();
+                navController.navigate(R.id.homeFragment);
 
                 homeItem.setVisible(true);
                 searchItem.setVisible(true);

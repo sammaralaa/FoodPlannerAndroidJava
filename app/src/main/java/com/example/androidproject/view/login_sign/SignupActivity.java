@@ -1,6 +1,4 @@
-package com.example.androidproject.view;
-
-import static androidx.core.app.ActivityCompat.startActivityForResult;
+package com.example.androidproject.view.login_sign;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.androidproject.R;
 import com.example.androidproject.view.home.HomeActivity;
@@ -32,9 +26,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignupActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient googleSignInClient;
-    EditText editTextUserName , editTextEmail , editTextPassword;
+    EditText editTextUserName , editTextEmail , editTextPassword , editTextConfirmPass;
     Button btnSignup;
-    String name , email , pass;
+    String name , email , pass,conPass ;
     private FirebaseAuth mAuth;
 
     @Override
@@ -45,6 +39,7 @@ public class SignupActivity extends AppCompatActivity {
         editTextUserName = this.findViewById(R.id.nameEditText2);
         editTextEmail = this.findViewById(R.id.emailEditText2);
         editTextPassword = this.findViewById(R.id.passwordEditText2);
+        editTextConfirmPass = this.findViewById(R.id.passwordEditText3);
         btnSignup = this.findViewById(R.id.btnSignup);
         mAuth = FirebaseAuth.getInstance();
 
@@ -54,26 +49,37 @@ public class SignupActivity extends AppCompatActivity {
                 name = String.valueOf(editTextUserName.getText());
                 email = String.valueOf(editTextEmail.getText());
                 pass = String.valueOf(editTextPassword.getText());
+                conPass=String.valueOf(editTextConfirmPass.getText());
                 //if(TextUtils.isEmpty(name)){return}
                 Log.i("TAG", "onClick: "+name+" "+pass+" "+email);
-                mAuth.createUserWithEmailAndPassword(email, pass)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(view.getContext(), "sign up successfuly", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(view.getContext(), HomeActivity.class);
-                                    startActivity(intent);
-                                    // updateUI(user);
-                                } else {
-                                    // If sign in fails, display a message to the user.
+                if(name.isEmpty() || pass.isEmpty() || email.isEmpty() || conPass.isEmpty()){
+                    Toast.makeText(view.getContext(),"please fill empty feilds",Toast.LENGTH_SHORT).show();
+                }else {
+                    if(pass.equals(conPass)) {
+                        mAuth.createUserWithEmailAndPassword(email, pass)
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            Toast.makeText(view.getContext(), "sign up successfuly", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                                            startActivity(intent);
+                                            // updateUI(user);
+                                        } else {
+                                            // If sign in fails, display a message to the user.
 //                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
 
-                                    //updateUI(null);
-                                }
-                            }
-                        });
+                                            //updateUI(null);
+                                        }
+                                    }
+                                });
+                    }else{
+                        Toast.makeText(view.getContext(),"unmatched passwords",Toast.LENGTH_SHORT).show();
+                        editTextPassword.setText("");
+                        editTextConfirmPass.setText("");
+                    }
+                }
             }
         });
        // Intent signInIntent = googleSignInClient.getSignInIntent();

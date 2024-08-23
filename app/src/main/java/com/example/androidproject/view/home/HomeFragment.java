@@ -254,6 +254,8 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
             Navigation.findNavController(this.getView()).navigate(R.id.action_homeFragment_to_favoriteFragment);
         }else{
             Toast.makeText(this.getContext(),"Back Online",Toast.LENGTH_LONG);
+
+
         }
 
     }
