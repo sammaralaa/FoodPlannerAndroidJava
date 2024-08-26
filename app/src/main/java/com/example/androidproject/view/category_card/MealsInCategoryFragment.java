@@ -17,6 +17,7 @@ import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.network.FirebaseAuthManager;
+import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.presenter.MealsInCategoryPresenter;
 import com.example.androidproject.view.favorites.OnFavClickListener;
@@ -83,7 +84,7 @@ public class MealsInCategoryFragment extends Fragment implements IMealsInCategor
 
     @Override
     public void onFaveMealClick(Meal meal) {
-        presenter=new MealsInCategoryPresenter(this, MealsLocalDataSource.getInstance(this.getContext()));
+        presenter=new MealsInCategoryPresenter(this, MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         if(user.isAnonymous()){
             Toast.makeText(this.getContext(), "you need to login first", Toast.LENGTH_SHORT).show();
         }

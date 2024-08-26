@@ -18,14 +18,15 @@ import java.util.List;
 public class MealDetailsPresenter implements NetworkCallBack {
 
     private IMealDetails iView;
-    private MealsRemoteDataSource mealsRemoteDataSource = MealsRemoteDataSource.getInstance();
+    private MealsRemoteDataSource mealsRemoteDataSource ;
     private MealsLocalDataSource localDataSource;
     private IWeeklyPlanMealDetails iWeeklyPlanMealDetails;
     private IMealCard iMealCard;
 
-    public MealDetailsPresenter(IMealDetails iView , MealsLocalDataSource localDataSource){
+    public MealDetailsPresenter(IMealDetails iView , MealsLocalDataSource localDataSource,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView = iView;
         this.localDataSource=localDataSource;
+        this.mealsRemoteDataSource=mealsRemoteDataSource;
     }
     public MealDetailsPresenter(IWeeklyPlanMealDetails iView , MealsLocalDataSource localDataSource){
         iWeeklyPlanMealDetails = iView;

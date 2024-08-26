@@ -16,11 +16,12 @@ import java.util.List;
 
 public class HomePresenter implements NetworkCallBack , NetworkCallBackCategory , NetworkCallBackCountry {
     private IMealCard iView;
-    private MealsRemoteDataSource mealsRemoteDataSource = MealsRemoteDataSource.getInstance();
+    private   MealsRemoteDataSource mealsRemoteDataSource;
     private MealsLocalDataSource localDataSource;
-    public HomePresenter(IMealCard iView , MealsLocalDataSource localDataSource){
+    public HomePresenter(IMealCard iView , MealsLocalDataSource localDataSource,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView=iView;
         this.localDataSource = localDataSource;
+        this.mealsRemoteDataSource=mealsRemoteDataSource;
     }
     public void getMeals(){
        // ProductRepository.getAllProducts(this);

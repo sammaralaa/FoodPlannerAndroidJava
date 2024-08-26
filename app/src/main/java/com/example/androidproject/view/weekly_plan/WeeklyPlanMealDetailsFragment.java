@@ -127,7 +127,7 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
 
     @Override
     public void getPlanMeal(WeeklyPlanMealDetails meals) {
-        Log.i(TAG, "getPlanMeal: " + meals.getMealName());
+      //  Log.i(TAG, "getPlanMeal: " + meals.getMealName());
         mealFull = meals;
 
         }

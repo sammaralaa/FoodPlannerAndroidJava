@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.androidproject.R;
 import com.example.androidproject.model.mealsModel.Meal;
+import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.SearchPresenter;
 import com.example.androidproject.view.category_card.CategoryCardAdapter;
 import com.example.androidproject.view.meal_card.MealCardAdapter;
@@ -68,7 +69,7 @@ public class SearchFragment extends Fragment implements ISearchView {
         searchView = view.findViewById(R.id.searchViewtxt);
         errorImg = view.findViewById(R.id.sad);
         errormsg = view.findViewById(R.id.matchtxt);
-        presenter = new SearchPresenter(this);
+        presenter = new SearchPresenter(this, MealsRemoteDataSource.getInstance());
         recyclerView = view.findViewById(R.id.searchResaultRecycler);
         recyclerView.setHasFixedSize(false);
         LinearLayoutManager layoutManager3 =new LinearLayoutManager(view.getContext());

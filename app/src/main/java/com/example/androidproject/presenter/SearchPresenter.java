@@ -11,8 +11,9 @@ public class SearchPresenter implements NetworkCallBack {
     ISearchView iView;
     MealsRemoteDataSource mealsRemoteDataSource = MealsRemoteDataSource.getInstance();
 
-    public SearchPresenter(ISearchView iView){
+    public SearchPresenter(ISearchView iView,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView=iView;
+        this.mealsRemoteDataSource=mealsRemoteDataSource;
     }
     public void searchByCategory(String category){
         mealsRemoteDataSource.searchByCategoryCall(this,category);

@@ -29,6 +29,7 @@ import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.network.ConnectionCheck;
 import com.example.androidproject.network.ConnectionCheckListener;
 import com.example.androidproject.network.FirebaseAuthManager;
+import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.HomePresenter;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.view.category_card.CategoryCardAdapter;
@@ -96,7 +97,7 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         Log.i("save", "onViewStateRestored: ");
-        presenter = new HomePresenter(this , MealsLocalDataSource.getInstance(this.getContext()));
+        presenter = new HomePresenter(this , MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         if(savedInstanceState != null){
             String id = savedInstanceState.getString("mealID");
             presenter.getMealById(id);
@@ -110,7 +111,7 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
 
          user = firebaseAuthManager.getCurrentUser();
         Log.i("save", "onViewCreated: ");
-        presenter = new HomePresenter(this , MealsLocalDataSource.getInstance(this.getContext()));
+        presenter = new HomePresenter(this , MealsLocalDataSource.getInstance(this.getContext()),MealsRemoteDataSource.getInstance());
         sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, 0);
         long savedTime = sharedPreferences.getLong(KEY_SAVED_TIME, 0);
         RandomMealID = sharedPreferences.getString(MEAL_OF_DAY_ID, "");

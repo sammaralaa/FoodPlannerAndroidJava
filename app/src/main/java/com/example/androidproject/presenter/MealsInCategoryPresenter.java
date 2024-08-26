@@ -10,14 +10,15 @@ import java.util.List;
 
 public class MealsInCategoryPresenter implements NetworkCallBack {
     IMealsInCategory iView;
-    MealsRemoteDataSource mealsRemoteDataSource = MealsRemoteDataSource.getInstance();
+    MealsRemoteDataSource mealsRemoteDataSource ;
     MealsLocalDataSource localDataSource;
     public MealsInCategoryPresenter(IMealsInCategory iView){
         this.iView = iView;
     }
-    public MealsInCategoryPresenter(IMealsInCategory iView,MealsLocalDataSource localDataSource){
+    public MealsInCategoryPresenter(IMealsInCategory iView,MealsLocalDataSource localDataSource,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView = iView;
         this.localDataSource=localDataSource;
+        this.mealsRemoteDataSource=mealsRemoteDataSource;
     }
     public void getAllMeals(String category){
         mealsRemoteDataSource.searchByCategoryCall(this,category);

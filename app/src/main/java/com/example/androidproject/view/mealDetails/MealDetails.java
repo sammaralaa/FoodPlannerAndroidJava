@@ -26,6 +26,7 @@ import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.network.FirebaseAuthManager;
+import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.view.category_card.CategoryCardAdapter;
 import com.example.androidproject.view.ingrediants.IngredientList;
@@ -77,7 +78,7 @@ public class MealDetails extends Fragment implements IMealDetails {
         super.onViewCreated(view, savedInstanceState);
         Meal meal = MealDetailsArgs.fromBundle(getArguments()).getMealData();
         FirebaseUser user = firebaseAuthManager.getCurrentUser();
-        presenter = new MealDetailsPresenter(this, MealsLocalDataSource.getInstance(this.getContext()));
+        presenter = new MealDetailsPresenter(this, MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         presenter.getMealByID(meal.getId());
         Log.i("TAG", "onViewCreated: id = " + meal.getId());
         name = view.findViewById(R.id.txtMealName);

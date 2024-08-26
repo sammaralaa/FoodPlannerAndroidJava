@@ -24,6 +24,7 @@ import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.model.mealsModel.Meal;
+import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.view.ingrediants.IngredientList;
 import com.example.androidproject.view.ingrediants.IngredientsAdapter;
@@ -72,7 +73,7 @@ public class FavMealDetailsFragment extends Fragment implements IMealDetails {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new MealDetailsPresenter(this,MealsLocalDataSource.getInstance(this.getContext()));
+        presenter = new MealDetailsPresenter(this,MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         Meal meal = FavMealDetailsFragmentArgs.fromBundle(getArguments()).getMealDetails();
 
         name = view.findViewById(R.id.txtMealNameFav);
