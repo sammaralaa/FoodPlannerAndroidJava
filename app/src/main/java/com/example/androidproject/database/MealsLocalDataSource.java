@@ -1,7 +1,6 @@
 package com.example.androidproject.database;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -12,11 +11,10 @@ import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao
 import com.example.androidproject.model.mealsModel.Meal;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 public class MealsLocalDataSource {
 
-    private static MealsLocalDataSource productsRepository =null;
+    private static MealsLocalDataSource mealsLocalDataSource =null;
     MealDAO mealDAO;
     WeeklyPlanMealDao weeklyPlanMealDao;
     WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao;
@@ -36,16 +34,18 @@ public class MealsLocalDataSource {
         weeklyPlanDetailsList = weeklyPlanMealDetailsDao.getAllPlanMeals();
     }
 
+    public static MealsLocalDataSource getInstance(Context context){
+        if(mealsLocalDataSource == null){
+            mealsLocalDataSource = new MealsLocalDataSource(context.getApplicationContext());
+        }
+        return mealsLocalDataSource;
+    }
+
     public LiveData<List<Meal>> getLocalMeals(){
         return mealsList;
     }
 
-    public static MealsLocalDataSource getInstance(Context context){
-        if(productsRepository == null){
-            productsRepository = new MealsLocalDataSource(context.getApplicationContext());
-        }
-        return productsRepository;
-    }
+
 
     public void removeMealFromFav(Meal meal){
         new Thread(){
@@ -56,7 +56,7 @@ public class MealsLocalDataSource {
         }.start();
 
     }
-    public void insert(Meal meal){
+    public void insertMealToFav(Meal meal){
         new Thread(){
             @Override
             public void run() {

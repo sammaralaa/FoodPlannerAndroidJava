@@ -1,7 +1,6 @@
 package com.example.androidproject.view.home;
 
 
-import android.app.Dialog;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -24,26 +23,19 @@ import android.widget.Toast;
 import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.model.categoriesModel.Category;
-import com.example.androidproject.model.countriesModel.Country;
 import com.example.androidproject.model.mealsModel.Meal;
-import com.example.androidproject.network.ConnectionCheck;
-import com.example.androidproject.network.ConnectionCheckListener;
-import com.example.androidproject.network.FirebaseAuthManager;
+import com.example.androidproject.network.internetConnection.ConnectionCheck;
+import com.example.androidproject.network.internetConnection.ConnectionCheckListener;
 import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.HomePresenter;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.view.category_card.CategoryCardAdapter;
 import com.example.androidproject.view.country_card.CountryCardAdapter;
-import com.example.androidproject.view.favorites.OnFavClickListener;
 import com.example.androidproject.view.meal_card.IMealCard;
 import com.example.androidproject.view.meal_card.MealCardAdapter;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseUser;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
-
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +49,6 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
     CategoryCardAdapter adapterCategory;
     CountryCardAdapter countryCardAdapter;
     MealDetailsPresenter mealDetailsPresenter;
-    FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
     FirebaseUser user;
     String RandomMealID;
     SharedPreferences sharedPreferences;
@@ -109,9 +100,10 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-         user = firebaseAuthManager.getCurrentUser();
+
         Log.i("save", "onViewCreated: ");
         presenter = new HomePresenter(this , MealsLocalDataSource.getInstance(this.getContext()),MealsRemoteDataSource.getInstance());
+        user = presenter.getCurrentUserType();
         sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, 0);
         long savedTime = sharedPreferences.getLong(KEY_SAVED_TIME, 0);
         RandomMealID = sharedPreferences.getString(MEAL_OF_DAY_ID, "");

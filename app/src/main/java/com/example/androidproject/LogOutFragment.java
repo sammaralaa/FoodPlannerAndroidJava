@@ -19,17 +19,16 @@ import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
 import com.example.androidproject.network.BackupUserData;
 import com.example.androidproject.network.FirebaseAuthManager;
+import com.example.androidproject.presenter.LogoutPresenter;
 import com.example.androidproject.view.home.HomeActivity;
 import com.example.androidproject.view.login_sign.MainActivity;
 import com.google.firebase.auth.FirebaseUser;
 
 
 public class LogOutFragment extends Fragment {
-    WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao;
-    WeeklyPlanMealDao weeklyPlanMealDao;
-    MealDAO mealDAO;
-    BackupUserData backupUserData;
-    FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
+
+    LogoutPresenter logoutPresenter;
+
     public LogOutFragment() {
         // Required empty public constructor
     }
@@ -37,11 +36,8 @@ public class LogOutFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        weeklyPlanMealDao = Room.getInstance(this.getContext()).getWeeklyPlanMealDao();
-        weeklyPlanMealDetailsDao = Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao();
-        mealDAO = Room.getInstance(this.getContext()).getMealDao();
-        backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDao,weeklyPlanMealDetailsDao);
-        backupUserData.backupDataToFirestore();
+
+
         //Log.i("FirebaseAuth ", "onCreate: logOut "+firebaseAuthManager.getCurrentUser().getUid());
     }
 
@@ -55,13 +51,16 @@ public class LogOutFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        logoutPresenter = new LogoutPresenter();
+        logoutPresenter.backupData(Room.getInstance(this.getContext()).getMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao());
+        logoutPresenter.Logout();
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
                 // Start the MainActivity
 
 
-        firebaseAuthManager.logout();
+
 
 
         Intent intent = new Intent(view.getContext(), MainActivity.class);

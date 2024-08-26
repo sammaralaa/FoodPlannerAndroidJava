@@ -99,7 +99,7 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
         area.setText(mealFull.getOriginCountry());
         instructions.setText(mealFull.getInstructions());
         Glide.with(this.getContext()).load(mealFull.getMealThumb()).into(img);
-        video_id = extractVideoId(mealFull.getMealVideo());
+        video_id = presenter.extractVideoId(mealFull.getMealVideo());
 
         IngredientList ingredientList = new IngredientList(mealFull);
         ingredientsAdapter=new IngredientsAdapter(this.getContext(),ingredientList.ingredients);
@@ -132,19 +132,4 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
 
         }
 
-    public static String extractVideoId(String url) {
-        String videoId = null;
-
-        if (url != null && url.contains("v=")) {
-            int index = url.indexOf("v=") + 2;
-            videoId = url.substring(index);
-
-            int ampersandIndex = videoId.indexOf("&");
-            if (ampersandIndex != -1) {
-                videoId = videoId.substring(0, ampersandIndex);
-            }
-        }
-
-        return videoId;
-    }
 }

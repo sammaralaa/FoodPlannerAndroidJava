@@ -6,12 +6,14 @@ import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.model.mealsModel.Meal;
+import com.example.androidproject.network.FirebaseAuthManager;
 import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.network.NetworkCallBack;
-import com.example.androidproject.view.favorites.OnFavClickListener;
 import com.example.androidproject.view.mealDetails.IMealDetails;
 import com.example.androidproject.view.meal_card.IMealCard;
 import com.example.androidproject.view.weekly_plan.IWeeklyPlanMealDetails;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -21,16 +23,19 @@ public class MealDetailsPresenter implements NetworkCallBack {
     private MealsRemoteDataSource mealsRemoteDataSource ;
     private MealsLocalDataSource localDataSource;
     private IWeeklyPlanMealDetails iWeeklyPlanMealDetails;
+    private FirebaseAuthManager firebaseAuthManager;
     private IMealCard iMealCard;
 
     public MealDetailsPresenter(IMealDetails iView , MealsLocalDataSource localDataSource,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView = iView;
         this.localDataSource=localDataSource;
         this.mealsRemoteDataSource=mealsRemoteDataSource;
+        this.firebaseAuthManager = new FirebaseAuthManager(FirebaseAuth.getInstance());
     }
     public MealDetailsPresenter(IWeeklyPlanMealDetails iView , MealsLocalDataSource localDataSource){
         iWeeklyPlanMealDetails = iView;
         this.localDataSource=localDataSource;
+        this.firebaseAuthManager = new FirebaseAuthManager(FirebaseAuth.getInstance());
     }
     public MealDetailsPresenter(IMealCard iview, MealsLocalDataSource mealsLocalDataSource){
         this.iMealCard=iview;
@@ -40,7 +45,7 @@ public class MealDetailsPresenter implements NetworkCallBack {
         mealsRemoteDataSource.getMealByIdCall(this,id);
     }
     public void addToFav(Meal meal){
-        localDataSource.insert(meal);
+        localDataSource.insertMealToFav(meal);
     }
     public void addToPlan(WeeklyPlanMeal meal , Meal mealDetails){
         WeeklyPlanMealDetails w = WeeklyPlanMealDetails.convertFromMeal(mealDetails);
@@ -55,6 +60,27 @@ public class MealDetailsPresenter implements NetworkCallBack {
 
         }).start();
     }
+
+    public FirebaseUser getCurrentUserType() {
+        return firebaseAuthManager.getCurrentUser();
+    }
+
+    public  String extractVideoId(String url) {
+        String videoId = null;
+
+        if (url != null && url.contains("v=")) {
+            int index = url.indexOf("v=") + 2;
+            videoId = url.substring(index);
+
+            int ampersandIndex = videoId.indexOf("&");
+            if (ampersandIndex != -1) {
+                videoId = videoId.substring(0, ampersandIndex);
+            }
+        }
+
+        return videoId;
+    }
+
     @Override
     public void onSuccessResult(List<Meal> meals) {
         Log.i("TAG", "onSuccessResult: "+meals.size());

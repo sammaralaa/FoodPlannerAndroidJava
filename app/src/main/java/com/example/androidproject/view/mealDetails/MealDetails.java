@@ -52,7 +52,6 @@ public class MealDetails extends Fragment implements IMealDetails {
     Button addToFav , addToPlan;
     Spinner mealTypeSpinner;
     String selectedDate;
-     FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
     RecyclerView ingreRecycler;
     IngredientsAdapter ingredientsAdapter;
 
@@ -77,7 +76,7 @@ public class MealDetails extends Fragment implements IMealDetails {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Meal meal = MealDetailsArgs.fromBundle(getArguments()).getMealData();
-        FirebaseUser user = firebaseAuthManager.getCurrentUser();
+        FirebaseUser user = presenter.getCurrentUserType();
         presenter = new MealDetailsPresenter(this, MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         presenter.getMealByID(meal.getId());
         Log.i("TAG", "onViewCreated: id = " + meal.getId());
@@ -185,25 +184,11 @@ public class MealDetails extends Fragment implements IMealDetails {
         //Log.i("TAG", "onViewCreated: mealFull"+meal.getCategory());
         area.setText(mealFull.getOriginCountry());
         instructions.setText(mealFull.getInstructions());
-        video_id = extractVideoId(mealFull.getMealVideo());
+        video_id = presenter.extractVideoId(mealFull.getMealVideo());
         IngredientList ingredientList = new IngredientList(mealFull);
         ingredientsAdapter=new IngredientsAdapter(this.getContext(),ingredientList.ingredients);
         ingreRecycler.setAdapter(ingredientsAdapter);
     }
 
-    public static String extractVideoId(String url) {
-        String videoId = null;
 
-        if (url != null && url.contains("v=")) {
-            int index = url.indexOf("v=") + 2;
-            videoId = url.substring(index);
-
-            int ampersandIndex = videoId.indexOf("&");
-            if (ampersandIndex != -1) {
-                videoId = videoId.substring(0, ampersandIndex);
-            }
-        }
-
-        return videoId;
-    }
 }

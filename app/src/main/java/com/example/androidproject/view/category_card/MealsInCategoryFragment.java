@@ -33,7 +33,6 @@ public class MealsInCategoryFragment extends Fragment implements IMealsInCategor
     MealsInCategoryPresenter presenter;
     MealsInCategoryAdapter adapter;
     RecyclerView recyclerView;
-    FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
     FirebaseUser user;
     public MealsInCategoryFragment() {
         // Required empty public constructor
@@ -55,7 +54,7 @@ public class MealsInCategoryFragment extends Fragment implements IMealsInCategor
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        user = firebaseAuthManager.getCurrentUser();
+        user = presenter.getCurrentUserType();
         String Name = MealsInCategoryFragmentArgs.fromBundle(getArguments()).getName();
         String Type = MealsInCategoryFragmentArgs.fromBundle(getArguments()).getType();
         presenter = new MealsInCategoryPresenter(this);

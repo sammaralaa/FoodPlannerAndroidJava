@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidproject.R;
-import com.example.androidproject.database.MealDAO;
 import com.example.androidproject.database.Room;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
-import com.example.androidproject.network.BackupUserData;
 import com.example.androidproject.presenter.LoginSignupPresenter;
 import com.example.androidproject.view.home.HomeActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 
 public class LoginFragment extends Fragment implements ILogin {
@@ -88,7 +78,7 @@ public class LoginFragment extends Fragment implements ILogin {
     public void loginSuccess() {
         Intent intent = new Intent(this.getContext(), HomeActivity.class);
         startActivity(intent);
-        loginSignupPresenter.setBackupUserData(Room.getInstance(this.getContext()).getMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao());
+        loginSignupPresenter.setRestoreUserData(Room.getInstance(this.getContext()).getMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao());
         getActivity().finish();
     }
 
