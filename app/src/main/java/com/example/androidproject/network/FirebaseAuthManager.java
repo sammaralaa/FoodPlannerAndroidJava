@@ -1,17 +1,9 @@
 package com.example.androidproject.network;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
-import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.androidproject.view.welcom.IWelcom;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,83 +14,70 @@ import com.google.firebase.auth.FirebaseUser;
 public class FirebaseAuthManager {
 
     private FirebaseAuth mAuth;
-    private Activity activity;
-    IWelcom iWelcom;
+    boolean loginSuccess =false;
+    Boolean loginAnonymouslyResult =false;
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient googleSignInClient;
-    public FirebaseAuthManager(Activity activity,IWelcom iWelcom) {
-        this.mAuth = FirebaseAuth.getInstance();
-        this.activity = activity;
-        this.iWelcom=iWelcom;
+    public FirebaseAuthManager(FirebaseAuth mAuth) {
+        this.mAuth = mAuth;
     }
-    public FirebaseAuthManager (){
-        this.mAuth = FirebaseAuth.getInstance();
-    }
-
     // Sign up with email and password
     public void signUp(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign up success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.i("FirebaseAuthManager", "createUserWithEmail:success");
-                            Toast.makeText(activity, "Sign Up Successful", Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign up fails, display a message to the user.
                             Log.w("FirebaseAuthManager", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Sign Up Failed: " + task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
     }
 
     // Login with email and password
-    public void login(String email, String password) {
+    public Boolean login(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Login success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Log.d("FirebaseAuthManager", "signInWithEmail:success");
-                            Toast.makeText(activity, "Login Successful", Toast.LENGTH_SHORT).show();
+                            Log.i("FirebaseAuthManager", "signInWithEmail:success");
+                            loginSuccess = true;
+
                         } else {
                             // If login fails, display a message to the user.
-                            Log.w("FirebaseAuthManager", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Login Failed: " + task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
+                            loginSuccess=false;
+                            Log.i("FirebaseAuthManager", "signInWithEmail:failure", task.getException());
                         }
                     }
                 });
+        return loginSuccess;
     }
 
     // Login anonymously
-    public void loginAnonymously() {
+    public Boolean loginAnonymously() {
+
         mAuth.signInAnonymously()
-                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Login success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
-                            iWelcom.successLognAnonymously();
-                           // Log.d("FirebaseAuthManager", "signInAnonymously:success");
-                           //
-
+                            loginAnonymouslyResult = true;
                         } else {
-
-                            iWelcom.failedLoginAnonymously();
-                            // If login fails, display a message to the user.
-                           // Log.w("FirebaseAuthManager", "signInAnonymously:failure", task.getException());
-                           //
+                            loginAnonymouslyResult = false;
                         }
                     }
                 });
+        return loginAnonymouslyResult;
     }
 
     private void signIn() {
@@ -106,7 +85,7 @@ public class FirebaseAuthManager {
 //        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-//    //محتاجه اكتفيتي :""""")
+
 //    @Override
 //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
@@ -131,7 +110,6 @@ public class FirebaseAuthManager {
     // Logout
     public void logout() {
         mAuth.signOut();
-        //Toast.makeText(activity, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
     }
 
 
