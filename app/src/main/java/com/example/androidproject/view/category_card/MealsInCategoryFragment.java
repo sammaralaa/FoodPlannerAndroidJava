@@ -54,10 +54,10 @@ public class MealsInCategoryFragment extends Fragment implements IMealsInCategor
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        presenter = new MealsInCategoryPresenter(this,MealsLocalDataSource.getInstance(view.getContext()),MealsRemoteDataSource.getInstance());
         user = presenter.getCurrentUserType();
         String Name = MealsInCategoryFragmentArgs.fromBundle(getArguments()).getName();
         String Type = MealsInCategoryFragmentArgs.fromBundle(getArguments()).getType();
-        presenter = new MealsInCategoryPresenter(this);
         if(Type.equals("category")){
             presenter.getAllMeals(Name);
         }

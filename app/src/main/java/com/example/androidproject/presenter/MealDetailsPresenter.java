@@ -9,6 +9,7 @@ import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.network.FirebaseAuthManager;
 import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.network.NetworkCallBack;
+import com.example.androidproject.network.repository.MealsRepositoryImpl;
 import com.example.androidproject.view.mealDetails.IMealDetails;
 import com.example.androidproject.view.meal_card.IMealCard;
 import com.example.androidproject.view.weekly_plan.IWeeklyPlanMealDetails;
@@ -20,42 +21,40 @@ import java.util.List;
 public class MealDetailsPresenter implements NetworkCallBack {
 
     private IMealDetails iView;
-    private MealsRemoteDataSource mealsRemoteDataSource ;
-    private MealsLocalDataSource localDataSource;
+    MealsRepositoryImpl repository;
     private IWeeklyPlanMealDetails iWeeklyPlanMealDetails;
     private FirebaseAuthManager firebaseAuthManager;
     private IMealCard iMealCard;
 
     public MealDetailsPresenter(IMealDetails iView , MealsLocalDataSource localDataSource,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView = iView;
-        this.localDataSource=localDataSource;
-        this.mealsRemoteDataSource=mealsRemoteDataSource;
+        repository = MealsRepositoryImpl.getInstance(localDataSource,mealsRemoteDataSource);
         this.firebaseAuthManager = new FirebaseAuthManager(FirebaseAuth.getInstance());
     }
     public MealDetailsPresenter(IWeeklyPlanMealDetails iView , MealsLocalDataSource localDataSource){
         iWeeklyPlanMealDetails = iView;
-        this.localDataSource=localDataSource;
+        repository = MealsRepositoryImpl.getInstance(localDataSource);
         this.firebaseAuthManager = new FirebaseAuthManager(FirebaseAuth.getInstance());
     }
     public MealDetailsPresenter(IMealCard iview, MealsLocalDataSource mealsLocalDataSource){
         this.iMealCard=iview;
-        this.localDataSource=mealsLocalDataSource;
+        repository = MealsRepositoryImpl.getInstance(mealsLocalDataSource);
     }
     public void getMealByID(String id){
-        mealsRemoteDataSource.getMealByIdCall(this,id);
+        repository.getMealById(this,id);
     }
     public void addToFav(Meal meal){
-        localDataSource.insertMealToFav(meal);
+        repository.insertMealToFav(meal);
     }
     public void addToPlan(WeeklyPlanMeal meal , Meal mealDetails){
         WeeklyPlanMealDetails w = WeeklyPlanMealDetails.convertFromMeal(mealDetails);
-        localDataSource.insertPlanMeal(meal , w);
+        repository.insertPlanMeal(meal , w);
 
     }
     public void getMealLocal(String id){
 
         new Thread(()->{
-            WeeklyPlanMealDetails  meal= localDataSource.getMealByID(id);
+            WeeklyPlanMealDetails  meal= repository.getMealByID(id);
             iWeeklyPlanMealDetails.getPlanMeal(meal);
 
         }).start();

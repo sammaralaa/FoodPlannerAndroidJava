@@ -10,6 +10,7 @@ import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.network.NetworkCallBack;
 import com.example.androidproject.network.NetworkCallBackCategory;
 import com.example.androidproject.network.NetworkCallBackCountry;
+import com.example.androidproject.network.repository.MealsRepositoryImpl;
 import com.example.androidproject.view.meal_card.IMealCard;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,13 +19,11 @@ import java.util.List;
 
 public class HomePresenter implements NetworkCallBack , NetworkCallBackCategory , NetworkCallBackCountry {
     private IMealCard iView;
-    private   MealsRemoteDataSource mealsRemoteDataSource;
-    private MealsLocalDataSource localDataSource;
+    private MealsRepositoryImpl repository;
     FirebaseAuthManager firebaseAuthManager;
     public HomePresenter(IMealCard iView , MealsLocalDataSource localDataSource,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView=iView;
-        this.localDataSource = localDataSource;
-        this.mealsRemoteDataSource=mealsRemoteDataSource;
+        repository = MealsRepositoryImpl.getInstance(localDataSource,mealsRemoteDataSource);
         firebaseAuthManager = new FirebaseAuthManager(FirebaseAuth.getInstance());
     }
     public HomePresenter(){
@@ -32,24 +31,24 @@ public class HomePresenter implements NetworkCallBack , NetworkCallBackCategory 
     }
     public void getMeals(){
        // ProductRepository.getAllProducts(this);
-        mealsRemoteDataSource.searchByCategoryCall(this,"Beef");
+        repository.searchByCategory(this,"Beef");
     }
 
     public void getRandomMeal(){
-        mealsRemoteDataSource.getRandomMealCall(this);
+        repository.getRandomMeal(this);
     }
     public void addToFav(Meal meal){
-        localDataSource.insertMealToFav(meal);
+        repository.insertMealToFav(meal);
     }
     public void getAllCategories(){
-        mealsRemoteDataSource.getAllCategoriesCall(this);
+        repository.getAllCategories(this);
     }
 
     public void listAllCountries(){
-        mealsRemoteDataSource.listAllCountriesCall(this);
+        repository.listAllCountries(this);
     }
     public void getMealById(String id){
-        mealsRemoteDataSource.getMealByIdCall(this,id);
+        repository.getMealById(this,id);
     }
 
     public FirebaseUser getCurrentUserType() {

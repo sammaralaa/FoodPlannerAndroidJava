@@ -75,9 +75,9 @@ public class MealDetails extends Fragment implements IMealDetails {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        presenter = new MealDetailsPresenter(this, MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         Meal meal = MealDetailsArgs.fromBundle(getArguments()).getMealData();
         FirebaseUser user = presenter.getCurrentUserType();
-        presenter = new MealDetailsPresenter(this, MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         presenter.getMealByID(meal.getId());
         Log.i("TAG", "onViewCreated: id = " + meal.getId());
         name = view.findViewById(R.id.txtMealName);

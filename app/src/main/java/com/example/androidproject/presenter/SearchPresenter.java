@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SearchPresenter implements NetworkCallBack {
     ISearchView iView;
-    MealsRemoteDataSource mealsRemoteDataSource = MealsRemoteDataSource.getInstance();
+    MealsRemoteDataSource mealsRemoteDataSource ;
 
     public SearchPresenter(ISearchView iView,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView=iView;

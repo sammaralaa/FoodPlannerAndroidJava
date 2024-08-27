@@ -23,9 +23,20 @@ public class MealsRepositoryImpl implements MealsRepository {
         this.remoteDataSource=remoteDataSource;
     }
 
+    private MealsRepositoryImpl(MealsLocalDataSource localDataSource){
+        this.localDataSource=localDataSource;
+    }
+
     public static MealsRepositoryImpl getInstance(MealsLocalDataSource localDataSource ,MealsRemoteDataSource remoteDataSource){
         if(repo == null){
             repo = new MealsRepositoryImpl(localDataSource,remoteDataSource);
+        }
+        return repo;
+    }
+
+    public static MealsRepositoryImpl getInstance(MealsLocalDataSource localDataSource){
+        if(repo == null){
+            repo = new MealsRepositoryImpl(localDataSource);
         }
         return repo;
     }
