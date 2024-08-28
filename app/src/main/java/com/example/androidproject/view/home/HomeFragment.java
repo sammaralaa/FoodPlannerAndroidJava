@@ -53,9 +53,11 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
     String RandomMealID;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private static final String KEY_SAVED_TIME = "saved_time";
+
     ConnectionCheck connectionCheck = new ConnectionCheck(this);
     private static final String PREFS_NAME = "MyPrefs";
-    private static final String KEY_SAVED_TIME = "saved_time";
+
     public final static String MEAL_OF_DAY_ID = "mealId";
 
     public HomeFragment() {
@@ -115,14 +117,11 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             requireContext().registerReceiver(connectionCheck,filter, view.getContext().RECEIVER_NOT_EXPORTED);
         }
-
-
         if (savedTime == 0) {
-            saveCurrentTimeToPreferences();
+            presenter.saveCurrentTimeToPreferences();
         }
 
-        // Call to check if the meal of the day should be fetched or kept from the previous day
-        getMealOfDay(savedTime, RandomMealID);
+        presenter.getMealOfDay(savedTime, RandomMealID);
         recyclerViewRandom = view.findViewById(R.id.cardRecyclerRandom);
         recyclerViewRandom.setHasFixedSize(true);
         LinearLayoutManager layoutManager2 =new LinearLayoutManager(view.getContext());
@@ -147,8 +146,6 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
         recyclerViewCountry = view.findViewById(R.id.countriesRecycler);
         recyclerViewCountry.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(),2,RecyclerView.VERTICAL,false);
-        //LinearLayoutManager layoutManagerCountry =new LinearLayoutManager(view.getContext());
-        //layoutManagerCountry.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewCountry.setLayoutManager(gridLayoutManager);
         recyclerViewCountry.setVisibility(View.VISIBLE);
 
@@ -215,27 +212,6 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
         else{
             presenter.addToFav(meal);
             Toast.makeText(this.getContext(), "Added to your favorites successfully", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void saveCurrentTimeToPreferences() {
-        long currentTime = System.currentTimeMillis();
-        editor = sharedPreferences.edit();
-        editor.putLong(KEY_SAVED_TIME, currentTime);
-        editor.apply();
-    }
-
-    private void getMealOfDay(long savedTime,String id) {
-        long currentTime = System.currentTimeMillis();
-        boolean isSameDay = (currentTime - savedTime) < TimeUnit.DAYS.toMillis(1);
-
-        if (isSameDay && !id.isEmpty()) {
-            // If the saved time is less than a day old and the ID is not empty, use the saved ID
-            presenter.getMealById(id);
-        } else {
-            // Otherwise, get a new random meal and save it
-            presenter.getRandomMeal();
-            saveCurrentTimeToPreferences();
         }
     }
 

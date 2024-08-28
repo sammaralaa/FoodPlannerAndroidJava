@@ -1,5 +1,6 @@
 package com.example.androidproject.presenter;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.androidproject.database.MealsLocalDataSource;
@@ -16,11 +17,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class HomePresenter implements NetworkCallBack , NetworkCallBackCategory , NetworkCallBackCountry {
     private IMealCard iView;
     private MealsRepositoryImpl repository;
     FirebaseAuthManager firebaseAuthManager;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private static final String KEY_SAVED_TIME = "saved_time";
     public HomePresenter(IMealCard iView , MealsLocalDataSource localDataSource,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView=iView;
         repository = MealsRepositoryImpl.getInstance(localDataSource,mealsRemoteDataSource);
@@ -50,7 +55,25 @@ public class HomePresenter implements NetworkCallBack , NetworkCallBackCategory 
     public void getMealById(String id){
         repository.getMealById(this,id);
     }
+    public void saveCurrentTimeToPreferences() {
+        long currentTime = System.currentTimeMillis();
+        editor = sharedPreferences.edit();
+        editor.putLong(KEY_SAVED_TIME, currentTime);
+        editor.apply();
+    }
+    public void getMealOfDay(long savedTime,String id) {
+        long currentTime = System.currentTimeMillis();
+        boolean isSameDay = (currentTime - savedTime) < TimeUnit.DAYS.toMillis(1);
 
+        if (isSameDay && !id.isEmpty()) {
+            // If the saved time is less than a day old and the ID is not empty, use the saved ID
+            getMealById(id);
+        } else {
+            // Otherwise, get a new random meal and save it
+            getRandomMeal();
+            saveCurrentTimeToPreferences();
+        }
+    }
     public FirebaseUser getCurrentUserType() {
         return firebaseAuthManager.getCurrentUser();
     }
