@@ -1,7 +1,6 @@
 package com.example.androidproject.presenter;
 
 import com.example.androidproject.database.MealDAO;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
 import com.example.androidproject.network.BackupUserData;
 import com.example.androidproject.network.FirebaseAuthManager;
@@ -19,8 +18,8 @@ public class LogoutPresenter {
         firebaseAuthManager.logout();
     }
 
-    public void backupData(MealDAO mealDAO, WeeklyPlanMealDao weeklyPlanMealDao, WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao){
-        backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDao,weeklyPlanMealDetailsDao);
+    public void backupData(MealDAO mealDAO, WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao){
+        backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDetailsDao);
         backupUserData.backupDataToFirestore();
     }
 }

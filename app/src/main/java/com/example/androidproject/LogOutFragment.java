@@ -7,22 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.androidproject.database.MealDAO;
 import com.example.androidproject.database.Room;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
-import com.example.androidproject.network.BackupUserData;
-import com.example.androidproject.network.FirebaseAuthManager;
 import com.example.androidproject.presenter.LogoutPresenter;
-import com.example.androidproject.view.home.HomeActivity;
 import com.example.androidproject.view.login_sign.MainActivity;
-import com.google.firebase.auth.FirebaseUser;
 
 
 public class LogOutFragment extends Fragment {
@@ -52,7 +43,7 @@ public class LogOutFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         logoutPresenter = new LogoutPresenter();
-        logoutPresenter.backupData(Room.getInstance(this.getContext()).getMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao());
+        logoutPresenter.backupData(Room.getInstance(this.getContext()).getMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao());
         logoutPresenter.Logout();
 //        new Handler().postDelayed(new Runnable() {
 //            @Override

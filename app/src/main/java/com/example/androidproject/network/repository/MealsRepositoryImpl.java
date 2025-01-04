@@ -3,7 +3,6 @@ package com.example.androidproject.network.repository;
 import androidx.lifecycle.LiveData;
 
 import com.example.androidproject.database.MealsLocalDataSource;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.network.MealsRemoteDataSource;
@@ -57,12 +56,12 @@ public class MealsRepositoryImpl implements MealsRepository {
     }
 
     @Override
-    public void insertPlanMeal(WeeklyPlanMeal meal, WeeklyPlanMealDetails mealDetails){
-        localDataSource.insertPlanMeal(meal,mealDetails);
+    public void insertPlanMeal( WeeklyPlanMealDetails mealDetails){
+        localDataSource.insertPlanMeal(mealDetails);
     }
 
     @Override
-    public LiveData<List<WeeklyPlanMeal>> getLocalPlanMeals(){
+    public LiveData<List<WeeklyPlanMealDetails>> getLocalPlanMeals(){
         return localDataSource.getLocalPlanMeals();
     }
     @Override
@@ -70,7 +69,7 @@ public class MealsRepositoryImpl implements MealsRepository {
         return localDataSource.getMealByID(id);
     }
     @Override
-    public void removeMealFromPlan(WeeklyPlanMeal meal){
+    public void removeMealFromPlan(WeeklyPlanMealDetails meal){
         localDataSource.removeMealFromPlan(meal);
     }
     ////Remote/////////////////////////////////

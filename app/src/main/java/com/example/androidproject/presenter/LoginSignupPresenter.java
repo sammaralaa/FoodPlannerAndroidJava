@@ -3,7 +3,6 @@ package com.example.androidproject.presenter;
 import android.util.Log;
 
 import com.example.androidproject.database.MealDAO;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
 import com.example.androidproject.network.BackupUserData;
 import com.example.androidproject.network.FirebaseAuthManager;
@@ -34,8 +33,8 @@ public class LoginSignupPresenter {
         }
 
     }
-    public void setRestoreUserData(MealDAO mealDAO, WeeklyPlanMealDao weeklyPlanMealDao, WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao){
-        backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDao,weeklyPlanMealDetailsDao);
+    public void setRestoreUserData(MealDAO mealDAO, WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao){
+        backupUserData = new BackupUserData(mealDAO,weeklyPlanMealDetailsDao);
         backupUserData.restoreDataFromFirestore();
     }
 }

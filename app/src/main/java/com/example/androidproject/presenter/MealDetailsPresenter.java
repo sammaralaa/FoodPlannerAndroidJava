@@ -3,7 +3,6 @@ package com.example.androidproject.presenter;
 import android.util.Log;
 
 import com.example.androidproject.database.MealsLocalDataSource;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.network.FirebaseAuthManager;
@@ -46,9 +45,9 @@ public class MealDetailsPresenter implements NetworkCallBack {
     public void addToFav(Meal meal){
         repository.insertMealToFav(meal);
     }
-    public void addToPlan(WeeklyPlanMeal meal , Meal mealDetails){
-        WeeklyPlanMealDetails w = WeeklyPlanMealDetails.convertFromMeal(mealDetails);
-        repository.insertPlanMeal(meal , w);
+    public void addToPlan(String date,String mealType , Meal mealDetails){
+        WeeklyPlanMealDetails w = WeeklyPlanMealDetails.convertFromMeal(mealDetails,date,mealType);
+        repository.insertPlanMeal(w);
 
     }
     public void getMealLocal(String id){

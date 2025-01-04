@@ -78,7 +78,7 @@ public class LoginFragment extends Fragment implements ILogin {
     public void loginSuccess() {
         Intent intent = new Intent(this.getContext(), HomeActivity.class);
         startActivity(intent);
-        loginSignupPresenter.setRestoreUserData(Room.getInstance(this.getContext()).getMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao());
+        loginSignupPresenter.setRestoreUserData(Room.getInstance(this.getContext()).getMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao());
         getActivity().finish();
     }
 

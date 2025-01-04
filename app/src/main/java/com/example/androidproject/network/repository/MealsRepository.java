@@ -2,7 +2,6 @@ package com.example.androidproject.network.repository;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.network.NetworkCallBack;
@@ -18,13 +17,13 @@ public interface MealsRepository {
 
     void insertMealToFav(Meal meal);
 
-    void insertPlanMeal(WeeklyPlanMeal meal, WeeklyPlanMealDetails mealDetails);
+    void insertPlanMeal( WeeklyPlanMealDetails mealDetails);
 
-    LiveData<List<WeeklyPlanMeal>> getLocalPlanMeals();
+    LiveData<List<WeeklyPlanMealDetails>> getLocalPlanMeals();
 
     WeeklyPlanMealDetails getMealByID(String id);
 
-    void removeMealFromPlan(WeeklyPlanMeal meal);
+    void removeMealFromPlan(WeeklyPlanMealDetails meal);
 
     void listAllCountries(NetworkCallBackCountry networkCallback);
 
