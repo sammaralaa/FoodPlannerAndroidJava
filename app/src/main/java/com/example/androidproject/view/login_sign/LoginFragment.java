@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,38 +16,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidproject.R;
-import com.example.androidproject.database.MealDAO;
 import com.example.androidproject.database.Room;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
-import com.example.androidproject.network.BackupUserData;
+import com.example.androidproject.presenter.LoginSignupPresenter;
 import com.example.androidproject.view.home.HomeActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements ILogin {
     EditText editName;
     EditText editPass;
     Button btnLogin;
-    FirebaseAuth auth;
+    LoginSignupPresenter loginSignupPresenter;
     String TAG = "Firebase Auth";
     String name,pass;
-    WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao;
-    WeeklyPlanMealDao weeklyPlanMealDao;
-    MealDAO mealDAO;
-    BackupUserData backupUserData;
+
     public LoginFragment() {
         // Required empty public constructor
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance();
 
         }
 
@@ -62,6 +48,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        loginSignupPresenter = new LoginSignupPresenter(this);
         TextView textView = view.findViewById(R.id.signuptxt);
          editName = view.findViewById(R.id.nameEditText);
          editPass = view.findViewById(R.id.passwordEditText);
@@ -81,35 +68,22 @@ public class LoginFragment extends Fragment {
                 if(name.isEmpty() || pass.isEmpty()){
                     Toast.makeText(view.getContext(),"please fill empty feilds",Toast.LENGTH_SHORT);
                 }else {
-                    auth.signInWithEmailAndPassword(name, pass)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
-                                        Log.d(TAG, "signInWithEmail:success");
-                                        FirebaseUser user = auth.getCurrentUser();
-                                        Log.i(TAG, "onComplete: " + user.getUid());
-                                        mealDAO = Room.getInstance(view.getContext()).getMealDao();
-                                        weeklyPlanMealDao = Room.getInstance(view.getContext()).getWeeklyPlanMealDao();
-                                        weeklyPlanMealDetailsDao = Room.getInstance(view.getContext()).getWeeklyPlanMealDetailsDao();
-                                        backupUserData = new BackupUserData(mealDAO, weeklyPlanMealDao, weeklyPlanMealDetailsDao);
-                                        backupUserData.restoreDataFromFirestore();
-                                        Intent intent = new Intent(view.getContext(), HomeActivity.class);
-                                        startActivity(intent);
-                                        getActivity().finish();
-                                        //updateUI(user);
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                        Toast.makeText(view.getContext(), "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
-                                        //updateUI(null);
-                                    }
-                                }
-                            });
+                    loginSignupPresenter.loginWithUsernameAndPass(name,pass);
                 }
             }
         });
+    }
+
+    @Override
+    public void loginSuccess() {
+        Intent intent = new Intent(this.getContext(), HomeActivity.class);
+        startActivity(intent);
+        loginSignupPresenter.setRestoreUserData(Room.getInstance(this.getContext()).getMealDao(), Room.getInstance(this.getContext()).getWeeklyPlanMealDetailsDao());
+        getActivity().finish();
+    }
+
+    @Override
+    public void loginFaild(String msg) {
+        Toast.makeText(this.getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 }

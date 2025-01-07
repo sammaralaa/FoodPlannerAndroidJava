@@ -10,17 +10,15 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
-import com.example.androidproject.model.mealsModel.Meal;
-import com.example.androidproject.presenter.FavoriteMealsPresenter;
+import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.presenter.MealsInPlanPresenter;
-import com.example.androidproject.view.favorites.FavMealsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +32,6 @@ public class PlanFragment extends Fragment implements IWeeklyPlan , OnDeleteMeal
     public PlanFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,18 +63,19 @@ public class PlanFragment extends Fragment implements IWeeklyPlan , OnDeleteMeal
     }
 
     @Override
-    public void getPlanMeals(LiveData<List<WeeklyPlanMeal>> meals) {
-        meals.observe(this, new Observer<List<WeeklyPlanMeal>>() {
+    public void getPlanMeals(LiveData<List<WeeklyPlanMealDetails>> meals) {
+        meals.observe(this, new Observer<List<WeeklyPlanMealDetails>>() {
             @Override
-            public void onChanged(List<WeeklyPlanMeal> meals1) {
+            public void onChanged(List<WeeklyPlanMealDetails> meals1) {
                 adapter.setList(meals1);
+                Log.i("TAG", "onChanged: planFragment "+meals1.size());
                 adapter.notifyDataSetChanged();
             }
         });
          }
 
     @Override
-    public void onDeletePlanMealClick(WeeklyPlanMeal meal) {
+    public void onDeletePlanMealClick(WeeklyPlanMealDetails meal) {
         presenter.deleteLocalMeal(meal);
         adapter.notifyDataSetChanged();
 

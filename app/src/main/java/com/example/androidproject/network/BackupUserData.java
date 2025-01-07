@@ -4,9 +4,6 @@ package com.example.androidproject.network;
 import android.util.Log;
 
 import com.example.androidproject.database.MealDAO;
-import com.example.androidproject.database.Room;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDao;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetailsDao;
 import com.example.androidproject.model.mealsModel.Meal;
@@ -23,14 +20,14 @@ import java.util.concurrent.Executors;
 public class BackupUserData {
     private final FirebaseFirestore firestore;
     private final MealDAO mealDAO;
-    private final WeeklyPlanMealDao weeklyPlanMealDao;
+    //private final WeeklyPlanMealDao weeklyPlanMealDao;
     private final WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao;
     private final FirebaseAuth auth;
 
-    public BackupUserData(MealDAO mealDAO, WeeklyPlanMealDao myWeekDao,WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao) {
+    public BackupUserData(MealDAO mealDAO,WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao) {
         firestore = FirebaseFirestore.getInstance();
         this.mealDAO = mealDAO;
-        this.weeklyPlanMealDao = myWeekDao;
+        //this.weeklyPlanMealDao = myWeekDao;
         this.weeklyPlanMealDetailsDao = weeklyPlanMealDetailsDao;
         auth = FirebaseAuth.getInstance();
 
@@ -71,35 +68,35 @@ public class BackupUserData {
                 }
             });
 
-            // Backup WeekPlan
-            CollectionReference collectionRefForWeekPlan = firestore.collection("users")
-                    .document(userId)
-                    .collection("WeekPlan");
-
-            collectionRefForWeekPlan.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    WriteBatch batch = firestore.batch();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        batch.delete(document.getReference());
-                    }
-                    batch.commit().addOnCompleteListener(deleteTask -> {
-                        if (deleteTask.isSuccessful()) {
-                            Executors.newSingleThreadExecutor().execute(() -> {
-                                List<WeeklyPlanMeal> itemsWeek = weeklyPlanMealDao.getAllPlanMealsforBackup();
-                                for (WeeklyPlanMeal item : itemsWeek) {
-                                    collectionRefForWeekPlan.document(item.getMealID()).set(item)
-                                            .addOnSuccessListener(aVoid -> Log.i("WeekPlanBackup", "Data backed up successfully - Meal : " + item.getMealID()))
-                                            .addOnFailureListener(e -> Log.i("WeekPlanBackup", "Error backing up data", e));
-                                }
-                            });
-                        } else {
-                            Log.i("WeekPlanBackup", "Error deleting old data", deleteTask.getException());
-                        }
-                    });
-                } else {
-                    Log.i("WeekPlanBackup", "Error getting documents for deletion: ", task.getException());
-                }
-            });
+//            // Backup WeekPlan
+//            CollectionReference collectionRefForWeekPlan = firestore.collection("users")
+//                    .document(userId)
+//                    .collection("WeekPlan");
+//
+//            collectionRefForWeekPlan.get().addOnCompleteListener(task -> {
+//                if (task.isSuccessful()) {
+//                    WriteBatch batch = firestore.batch();
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        batch.delete(document.getReference());
+//                    }
+//                    batch.commit().addOnCompleteListener(deleteTask -> {
+//                        if (deleteTask.isSuccessful()) {
+//                            Executors.newSingleThreadExecutor().execute(() -> {
+//                                List<WeeklyPlanMeal> itemsWeek = weeklyPlanMealDao.getAllPlanMealsforBackup();
+//                                for (WeeklyPlanMeal item : itemsWeek) {
+//                                    collectionRefForWeekPlan.document(item.getMealID()).set(item)
+//                                            .addOnSuccessListener(aVoid -> Log.i("WeekPlanBackup", "Data backed up successfully - Meal : " + item.getMealID()))
+//                                            .addOnFailureListener(e -> Log.i("WeekPlanBackup", "Error backing up data", e));
+//                                }
+//                            });
+//                        } else {
+//                            Log.i("WeekPlanBackup", "Error deleting old data", deleteTask.getException());
+//                        }
+//                    });
+//                } else {
+//                    Log.i("WeekPlanBackup", "Error getting documents for deletion: ", task.getException());
+//                }
+//            });
 
             // Backup WeekPlanDetails
             CollectionReference collectionRefWeekPlanDetails = firestore.collection("users")
@@ -117,7 +114,7 @@ public class BackupUserData {
                             Executors.newSingleThreadExecutor().execute(() -> {
                                 List<WeeklyPlanMealDetails> itemsWeek = weeklyPlanMealDetailsDao.getAllPlanMealsforBackup();
                                 for (WeeklyPlanMealDetails item : itemsWeek) {
-                                    collectionRefForWeekPlan.document(item.idMeal).set(item)
+                                    collectionRefWeekPlanDetails.document(item.idMeal).set(item)
                                             .addOnSuccessListener(aVoid -> Log.i("WeekPlanBackup", "Data backed up successfully - Meal : " + item.idMeal))
                                             .addOnFailureListener(e -> Log.i("WeekPlanBackup", "Error backing up data", e));
                                 }
@@ -156,24 +153,24 @@ public class BackupUserData {
                 }
             });
 
-            Executors.newSingleThreadExecutor().execute(weeklyPlanMealDao::deleteAll);
+           // Executors.newSingleThreadExecutor().execute(weeklyPlanMealDao::deleteAll);
 
-            CollectionReference collectionRefFoWeekPlan = firestore.collection("users")
-                    .document(userId)
-                    .collection("WeekPlan");
-
-            collectionRefFoWeekPlan.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        WeeklyPlanMeal item = document.toObject(WeeklyPlanMeal.class);
-                        Executors.newSingleThreadExecutor().execute(() -> {
-                            weeklyPlanMealDao.insertMany(item);
-                        });
-                    }
-                } else {
-                    Log.i("WeekPlanRestore", "Error getting documents: WeekPlan", task.getException());
-                }
-            });
+//            CollectionReference collectionRefFoWeekPlan = firestore.collection("users")
+//                    .document(userId)
+//                    .collection("WeekPlan");
+//
+//            collectionRefFoWeekPlan.get().addOnCompleteListener(task -> {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        WeeklyPlanMeal item = document.toObject(WeeklyPlanMeal.class);
+//                        Executors.newSingleThreadExecutor().execute(() -> {
+//                            weeklyPlanMealDao.insertMany(item);
+//                        });
+//                    }
+//                } else {
+//                    Log.i("WeekPlanRestore", "Error getting documents: WeekPlan", task.getException());
+//                }
+//            });
 
             Executors.newSingleThreadExecutor().execute(weeklyPlanMealDetailsDao::deleteAll);
 

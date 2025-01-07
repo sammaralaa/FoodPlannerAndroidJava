@@ -90,9 +90,12 @@ public class WeeklyPlanMealDetails implements Serializable {
         public String strMeasure19;
         public String strMeasure20;
         public String strSource;
-        //public Object strImageSource;
-        //public Object strCreativeCommonsConfirmed;
-        //public Object dateModified;
+        @NonNull
+        @ColumnInfo(name = "date")
+        public String date;
+        @NonNull
+        @ColumnInfo(name = "type")
+        public String mealType;
 
         public WeeklyPlanMealDetails(String idMeal, String strMeal, String strCategory, String strArea, List<String> ingredients, String strInstructions, String strMealThumb, String strYoutube) {
             this.idMeal = idMeal;
@@ -107,7 +110,7 @@ public class WeeklyPlanMealDetails implements Serializable {
 
         }
 
-        public static  WeeklyPlanMealDetails convertFromMeal(Meal meal) {
+        public static  WeeklyPlanMealDetails convertFromMeal(Meal meal,String date,String mealType) {
                 WeeklyPlanMealDetails weeklyPlanMealDetails = new WeeklyPlanMealDetails();
                 weeklyPlanMealDetails.idMeal = meal.idMeal;
                 weeklyPlanMealDetails.strMeal = meal.strMeal;
@@ -118,6 +121,8 @@ public class WeeklyPlanMealDetails implements Serializable {
                 weeklyPlanMealDetails.strYoutube = meal.strYoutube;
                 weeklyPlanMealDetails.strTags = meal.strTags;
                 weeklyPlanMealDetails.strSource = meal.strSource;
+                weeklyPlanMealDetails.date=date;
+                weeklyPlanMealDetails.mealType=mealType;
 
                 // Map Ingredients
                 weeklyPlanMealDetails.strIngredient1 = meal.strIngredient1;

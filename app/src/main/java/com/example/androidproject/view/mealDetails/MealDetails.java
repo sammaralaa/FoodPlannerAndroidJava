@@ -23,11 +23,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.model.mealsModel.Meal;
-import com.example.androidproject.network.FirebaseAuthManager;
+import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.MealDetailsPresenter;
-import com.example.androidproject.view.category_card.CategoryCardAdapter;
 import com.example.androidproject.view.ingrediants.IngredientList;
 import com.example.androidproject.view.ingrediants.IngredientsAdapter;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,12 +44,10 @@ public class MealDetails extends Fragment implements IMealDetails {
     ImageView img ,datePicker;
     MealDetailsPresenter presenter;
     Meal mealFull = new Meal();
-    WeeklyPlanMeal weeklyPlanMeal;
     String video_id;
     Button addToFav , addToPlan;
     Spinner mealTypeSpinner;
     String selectedDate;
-     FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
     RecyclerView ingreRecycler;
     IngredientsAdapter ingredientsAdapter;
 
@@ -75,9 +71,9 @@ public class MealDetails extends Fragment implements IMealDetails {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        presenter = new MealDetailsPresenter(this, MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         Meal meal = MealDetailsArgs.fromBundle(getArguments()).getMealData();
-        FirebaseUser user = firebaseAuthManager.getCurrentUser();
-        presenter = new MealDetailsPresenter(this, MealsLocalDataSource.getInstance(this.getContext()));
+        FirebaseUser user = presenter.getCurrentUserType();
         presenter.getMealByID(meal.getId());
         Log.i("TAG", "onViewCreated: id = " + meal.getId());
         name = view.findViewById(R.id.txtMealName);
@@ -123,8 +119,8 @@ public class MealDetails extends Fragment implements IMealDetails {
                 } else {
                     String mealType = mealTypeSpinner.getSelectedItem().toString();
                     //@NonNull String date, @NonNull String mealType, String dayOfWeek, String mealID, String mealName, String mealThump)
-                    weeklyPlanMeal = new WeeklyPlanMeal(selectedDate, mealType, meal.getId(), meal.getMealName(), meal.getMealThumb());
-                    presenter.addToPlan(weeklyPlanMeal, mealFull);
+                   // weeklyPlanMeal = new WeeklyPlanMeal(selectedDate, mealType, meal.getId(), meal.getMealName(), meal.getMealThumb());
+                    presenter.addToPlan(selectedDate,mealType, mealFull);
                     Toast.makeText(view.getContext(), "Added to your Weekly plan successfully", Toast.LENGTH_SHORT).show();
 
                 }
@@ -184,25 +180,11 @@ public class MealDetails extends Fragment implements IMealDetails {
         //Log.i("TAG", "onViewCreated: mealFull"+meal.getCategory());
         area.setText(mealFull.getOriginCountry());
         instructions.setText(mealFull.getInstructions());
-        video_id = extractVideoId(mealFull.getMealVideo());
+        video_id = presenter.extractVideoId(mealFull.getMealVideo());
         IngredientList ingredientList = new IngredientList(mealFull);
         ingredientsAdapter=new IngredientsAdapter(this.getContext(),ingredientList.ingredients);
         ingreRecycler.setAdapter(ingredientsAdapter);
     }
 
-    public static String extractVideoId(String url) {
-        String videoId = null;
 
-        if (url != null && url.contains("v=")) {
-            int index = url.indexOf("v=") + 2;
-            videoId = url.substring(index);
-
-            int ampersandIndex = videoId.indexOf("&");
-            if (ampersandIndex != -1) {
-                videoId = videoId.substring(0, ampersandIndex);
-            }
-        }
-
-        return videoId;
-    }
 }

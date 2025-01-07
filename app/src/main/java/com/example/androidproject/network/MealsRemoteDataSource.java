@@ -3,7 +3,6 @@ package com.example.androidproject.network;
 import android.util.Log;
 
 import com.example.androidproject.model.categoriesModel.CategoryResponse;
-import com.example.androidproject.model.countriesModel.CountryResponse;
 import com.example.androidproject.model.mealsModel.MealResponse;
 
 import retrofit2.Call;
@@ -33,7 +32,8 @@ public class MealsRemoteDataSource {
             }
             return mealsRemoteDataSource;
         }
-        public void makeNetworkCall (NetworkCallBackCountry networkCallback){
+
+        public void listAllCountriesCall(NetworkCallBackCountry networkCallback){
             Call<MealResponse> call = apiService.listAllCountries();
             call.enqueue(new Callback<MealResponse>() {
                 @Override
@@ -53,26 +53,7 @@ public class MealsRemoteDataSource {
             });
         }
 
-//    public void listAllCountriesCall (NetworkCallBackCountry networkCallback){
-//        Call<CountryResponse> call = apiService.listAllCountries();
-//        call.enqueue(new Callback<CountryResponse>() {
-//            @Override
-//            public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
-//                if(response.isSuccessful()){
-//                    networkCallback.onSuccessResultCountry(response.body().countries);
-//                    Log.i(TAG ,"onSuccess: CallBack listAllCountries " + response.body().getCountries().size());
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<CountryResponse> call, Throwable throwable) {
-//                Log.i(TAG ,"onFailure: CallBack listAllCountries ");
-//                networkCallback.onFailureResultCountry(throwable.getMessage());
-//                throwable.printStackTrace();
-//            }
-//        });
-//    }
-
-    public void searchByCategoryCall (NetworkCallBack networkCallback , String category){
+        public void searchByCategoryCall (NetworkCallBack networkCallback , String category){
         Call<MealResponse> call = apiService.searchByCategory(category);
         call.enqueue(new Callback<MealResponse>() {
             @Override
@@ -92,7 +73,7 @@ public class MealsRemoteDataSource {
         });
     }
 
-    public void searchByCountryCall (NetworkCallBack networkCallback , String country){
+        public void searchByCountryCall (NetworkCallBack networkCallback , String country){
         Call<MealResponse> call = apiService.searchByCountry(country);
         call.enqueue(new Callback<MealResponse>() {
             @Override
@@ -112,7 +93,7 @@ public class MealsRemoteDataSource {
         });
     }
 
-    public void searchByIngredientCall (NetworkCallBack networkCallback , String ingredient){
+        public void searchByIngredientCall (NetworkCallBack networkCallback , String ingredient){
         Call<MealResponse> call = apiService.searchByIngredient(ingredient);
         call.enqueue(new Callback<MealResponse>() {
             @Override
@@ -131,7 +112,7 @@ public class MealsRemoteDataSource {
             }
         });
     }
-    public void getRandomMealCall (NetworkCallBack networkCallback ){
+        public void getRandomMealCall (NetworkCallBack networkCallback ){
         Call<MealResponse> call = apiService.getRandomMeal();
         call.enqueue(new Callback<MealResponse>() {
             @Override
@@ -150,7 +131,7 @@ public class MealsRemoteDataSource {
             }
         });
     }
-    public void getMealByIdCall (NetworkCallBack networkCallback , String id){
+        public void getMealByIdCall (NetworkCallBack networkCallback , String id){
         Call<MealResponse> call = apiService.getMealById(id);
         call.enqueue(new Callback<MealResponse>() {
             @Override
@@ -168,7 +149,7 @@ public class MealsRemoteDataSource {
             }
         });
     }
-    public void getAllCategoriesCall (NetworkCallBackCategory networkCallback){
+        public void getAllCategoriesCall (NetworkCallBackCategory networkCallback){
         Call<CategoryResponse> call = apiService.listAllCategories();
         call.enqueue(new Callback<CategoryResponse>() {
             @Override

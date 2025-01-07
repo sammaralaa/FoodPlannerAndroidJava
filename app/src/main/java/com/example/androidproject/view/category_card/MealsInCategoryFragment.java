@@ -17,6 +17,7 @@ import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.network.FirebaseAuthManager;
+import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.presenter.MealsInCategoryPresenter;
 import com.example.androidproject.view.favorites.OnFavClickListener;
@@ -32,7 +33,6 @@ public class MealsInCategoryFragment extends Fragment implements IMealsInCategor
     MealsInCategoryPresenter presenter;
     MealsInCategoryAdapter adapter;
     RecyclerView recyclerView;
-    FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
     FirebaseUser user;
     public MealsInCategoryFragment() {
         // Required empty public constructor
@@ -54,10 +54,10 @@ public class MealsInCategoryFragment extends Fragment implements IMealsInCategor
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        user = firebaseAuthManager.getCurrentUser();
+        presenter = new MealsInCategoryPresenter(this,MealsLocalDataSource.getInstance(view.getContext()),MealsRemoteDataSource.getInstance());
+        user = presenter.getCurrentUserType();
         String Name = MealsInCategoryFragmentArgs.fromBundle(getArguments()).getName();
         String Type = MealsInCategoryFragmentArgs.fromBundle(getArguments()).getType();
-        presenter = new MealsInCategoryPresenter(this);
         if(Type.equals("category")){
             presenter.getAllMeals(Name);
         }
@@ -83,7 +83,7 @@ public class MealsInCategoryFragment extends Fragment implements IMealsInCategor
 
     @Override
     public void onFaveMealClick(Meal meal) {
-        presenter=new MealsInCategoryPresenter(this, MealsLocalDataSource.getInstance(this.getContext()));
+        presenter=new MealsInCategoryPresenter(this, MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         if(user.isAnonymous()){
             Toast.makeText(this.getContext(), "you need to login first", Toast.LENGTH_SHORT).show();
         }

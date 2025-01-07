@@ -15,24 +15,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.androidproject.R;
-import com.example.androidproject.network.ConnectionCheck;
-import com.example.androidproject.network.ConnectionCheckListener;
-import com.example.androidproject.network.FirebaseAuthManager;
-import com.example.androidproject.network.MealsRemoteDataSource;
+import com.example.androidproject.network.internetConnection.ConnectionCheck;
+import com.example.androidproject.network.internetConnection.ConnectionCheckListener;
+import com.example.androidproject.presenter.HomePresenter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity implements ConnectionCheckListener {
-    MealsRemoteDataSource mealsRemoteDataSource;
+    HomePresenter presenter;
     String TAG ="save";
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
     ConnectionCheck connectionCheck;
     NavController navController;
     MenuItem PlanItem ,loginItem,logoutItem,homeItem,searchItem;
@@ -41,9 +38,9 @@ public class HomeActivity extends AppCompatActivity implements ConnectionCheckLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "onCreate: " + " activity");
+       presenter = new HomePresenter();
         setContentView(R.layout.activity_home);
-        user = firebaseAuthManager.getCurrentUser();
+        user = presenter.getCurrentUserType();
         navigationView = findViewById(R.id.navigation_layout);
         drawerLayout = findViewById(R.id.drawer_layout);
         ActionBar actionBar = getSupportActionBar();

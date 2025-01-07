@@ -1,7 +1,6 @@
 package com.example.androidproject.view.home;
 
 
-import android.app.Dialog;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -24,25 +23,19 @@ import android.widget.Toast;
 import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.model.categoriesModel.Category;
-import com.example.androidproject.model.countriesModel.Country;
 import com.example.androidproject.model.mealsModel.Meal;
-import com.example.androidproject.network.ConnectionCheck;
-import com.example.androidproject.network.ConnectionCheckListener;
-import com.example.androidproject.network.FirebaseAuthManager;
+import com.example.androidproject.network.internetConnection.ConnectionCheck;
+import com.example.androidproject.network.internetConnection.ConnectionCheckListener;
+import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.HomePresenter;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.view.category_card.CategoryCardAdapter;
 import com.example.androidproject.view.country_card.CountryCardAdapter;
-import com.example.androidproject.view.favorites.OnFavClickListener;
 import com.example.androidproject.view.meal_card.IMealCard;
 import com.example.androidproject.view.meal_card.MealCardAdapter;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseUser;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
-
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,14 +49,15 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
     CategoryCardAdapter adapterCategory;
     CountryCardAdapter countryCardAdapter;
     MealDetailsPresenter mealDetailsPresenter;
-    FirebaseAuthManager firebaseAuthManager = new FirebaseAuthManager();
     FirebaseUser user;
     String RandomMealID;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private static final String KEY_SAVED_TIME = "saved_time";
+
     ConnectionCheck connectionCheck = new ConnectionCheck(this);
     private static final String PREFS_NAME = "MyPrefs";
-    private static final String KEY_SAVED_TIME = "saved_time";
+
     public final static String MEAL_OF_DAY_ID = "mealId";
 
     public HomeFragment() {
@@ -96,7 +90,7 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         Log.i("save", "onViewStateRestored: ");
-        presenter = new HomePresenter(this , MealsLocalDataSource.getInstance(this.getContext()));
+        presenter = new HomePresenter(this , MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         if(savedInstanceState != null){
             String id = savedInstanceState.getString("mealID");
             presenter.getMealById(id);
@@ -108,9 +102,10 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-         user = firebaseAuthManager.getCurrentUser();
+
         Log.i("save", "onViewCreated: ");
-        presenter = new HomePresenter(this , MealsLocalDataSource.getInstance(this.getContext()));
+        presenter = new HomePresenter(this , MealsLocalDataSource.getInstance(this.getContext()),MealsRemoteDataSource.getInstance());
+        user = presenter.getCurrentUserType();
         sharedPreferences = requireActivity().getSharedPreferences(PREFS_NAME, 0);
         long savedTime = sharedPreferences.getLong(KEY_SAVED_TIME, 0);
         RandomMealID = sharedPreferences.getString(MEAL_OF_DAY_ID, "");
@@ -122,14 +117,11 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             requireContext().registerReceiver(connectionCheck,filter, view.getContext().RECEIVER_NOT_EXPORTED);
         }
-
-
         if (savedTime == 0) {
-            saveCurrentTimeToPreferences();
+            presenter.saveCurrentTimeToPreferences();
         }
 
-        // Call to check if the meal of the day should be fetched or kept from the previous day
-        getMealOfDay(savedTime, RandomMealID);
+        presenter.getMealOfDay(savedTime, RandomMealID);
         recyclerViewRandom = view.findViewById(R.id.cardRecyclerRandom);
         recyclerViewRandom.setHasFixedSize(true);
         LinearLayoutManager layoutManager2 =new LinearLayoutManager(view.getContext());
@@ -154,8 +146,6 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
         recyclerViewCountry = view.findViewById(R.id.countriesRecycler);
         recyclerViewCountry.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(view.getContext(),2,RecyclerView.VERTICAL,false);
-        //LinearLayoutManager layoutManagerCountry =new LinearLayoutManager(view.getContext());
-        //layoutManagerCountry.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewCountry.setLayoutManager(gridLayoutManager);
         recyclerViewCountry.setVisibility(View.VISIBLE);
 
@@ -222,27 +212,6 @@ public class HomeFragment extends Fragment implements IMealCard , OnHomeFavClick
         else{
             presenter.addToFav(meal);
             Toast.makeText(this.getContext(), "Added to your favorites successfully", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void saveCurrentTimeToPreferences() {
-        long currentTime = System.currentTimeMillis();
-        editor = sharedPreferences.edit();
-        editor.putLong(KEY_SAVED_TIME, currentTime);
-        editor.apply();
-    }
-
-    private void getMealOfDay(long savedTime,String id) {
-        long currentTime = System.currentTimeMillis();
-        boolean isSameDay = (currentTime - savedTime) < TimeUnit.DAYS.toMillis(1);
-
-        if (isSameDay && !id.isEmpty()) {
-            // If the saved time is less than a day old and the ID is not empty, use the saved ID
-            presenter.getMealById(id);
-        } else {
-            // Otherwise, get a new random meal and save it
-            presenter.getRandomMeal();
-            saveCurrentTimeToPreferences();
         }
     }
 

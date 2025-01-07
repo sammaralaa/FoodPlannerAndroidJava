@@ -5,36 +5,28 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMealDetails;
-import com.example.androidproject.model.mealsModel.Meal;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.view.ingrediants.IngredientList;
 import com.example.androidproject.view.ingrediants.IngredientsAdapter;
-import com.example.androidproject.view.mealDetails.MealDetailsArgs;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPlanMealDetails {
@@ -99,7 +91,7 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
         area.setText(mealFull.getOriginCountry());
         instructions.setText(mealFull.getInstructions());
         Glide.with(this.getContext()).load(mealFull.getMealThumb()).into(img);
-        video_id = extractVideoId(mealFull.getMealVideo());
+        video_id = presenter.extractVideoId(mealFull.getMealVideo());
 
         IngredientList ingredientList = new IngredientList(mealFull);
         ingredientsAdapter=new IngredientsAdapter(this.getContext(),ingredientList.ingredients);
@@ -127,24 +119,9 @@ public class WeeklyPlanMealDetailsFragment extends Fragment implements IWeeklyPl
 
     @Override
     public void getPlanMeal(WeeklyPlanMealDetails meals) {
-        Log.i(TAG, "getPlanMeal: " + meals.getMealName());
+      //  Log.i(TAG, "getPlanMeal: " + meals.getMealName());
         mealFull = meals;
 
         }
 
-    public static String extractVideoId(String url) {
-        String videoId = null;
-
-        if (url != null && url.contains("v=")) {
-            int index = url.indexOf("v=") + 2;
-            videoId = url.substring(index);
-
-            int ampersandIndex = videoId.indexOf("&");
-            if (ampersandIndex != -1) {
-                videoId = videoId.substring(0, ampersandIndex);
-            }
-        }
-
-        return videoId;
-    }
 }

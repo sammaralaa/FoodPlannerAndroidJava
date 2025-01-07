@@ -1,47 +1,82 @@
 package com.example.androidproject.presenter;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.androidproject.database.MealsLocalDataSource;
 import com.example.androidproject.model.categoriesModel.Category;
-import com.example.androidproject.model.countriesModel.Country;
 import com.example.androidproject.model.mealsModel.Meal;
+import com.example.androidproject.network.FirebaseAuthManager;
 import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.network.NetworkCallBack;
 import com.example.androidproject.network.NetworkCallBackCategory;
 import com.example.androidproject.network.NetworkCallBackCountry;
+import com.example.androidproject.network.repository.MealsRepositoryImpl;
 import com.example.androidproject.view.meal_card.IMealCard;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class HomePresenter implements NetworkCallBack , NetworkCallBackCategory , NetworkCallBackCountry {
     private IMealCard iView;
-    private MealsRemoteDataSource mealsRemoteDataSource = MealsRemoteDataSource.getInstance();
-    private MealsLocalDataSource localDataSource;
-    public HomePresenter(IMealCard iView , MealsLocalDataSource localDataSource){
+    private MealsRepositoryImpl repository;
+    FirebaseAuthManager firebaseAuthManager;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private static final String KEY_SAVED_TIME = "saved_time";
+    public HomePresenter(IMealCard iView , MealsLocalDataSource localDataSource,MealsRemoteDataSource mealsRemoteDataSource){
         this.iView=iView;
-        this.localDataSource = localDataSource;
+        repository = MealsRepositoryImpl.getInstance(localDataSource,mealsRemoteDataSource);
+        firebaseAuthManager = new FirebaseAuthManager(FirebaseAuth.getInstance());
+
+    }
+    public HomePresenter(){
+        firebaseAuthManager = new FirebaseAuthManager(FirebaseAuth.getInstance());
     }
     public void getMeals(){
        // ProductRepository.getAllProducts(this);
-        mealsRemoteDataSource.searchByCategoryCall(this,"Beef");
+        repository.searchByCategory(this,"Beef");
     }
 
     public void getRandomMeal(){
-        mealsRemoteDataSource.getRandomMealCall(this);
+        repository.getRandomMeal(this);
     }
     public void addToFav(Meal meal){
-        localDataSource.insert(meal);
+        repository.insertMealToFav(meal);
     }
     public void getAllCategories(){
-        mealsRemoteDataSource.getAllCategoriesCall(this);
+        repository.getAllCategories(this);
     }
 
     public void listAllCountries(){
-        mealsRemoteDataSource.makeNetworkCall(this);
+        repository.listAllCountries(this);
     }
     public void getMealById(String id){
-        mealsRemoteDataSource.getMealByIdCall(this,id);
+        repository.getMealById(this,id);
+    }
+    public void saveCurrentTimeToPreferences() {
+        long currentTime = System.currentTimeMillis();
+//        editor = sharedPreferences.edit();
+//        editor.putLong(KEY_SAVED_TIME, currentTime);
+//        editor.apply();
+    }
+    public void getMealOfDay(long savedTime,String id) {
+        long currentTime = System.currentTimeMillis();
+        boolean isSameDay = (currentTime - savedTime) < TimeUnit.DAYS.toMillis(1);
+
+        if (isSameDay && !id.isEmpty()) {
+            // If the saved time is less than a day old and the ID is not empty, use the saved ID
+            getMealById(id);
+        } else {
+            // Otherwise, get a new random meal and save it
+            getRandomMeal();
+            saveCurrentTimeToPreferences();
+        }
+    }
+    public FirebaseUser getCurrentUserType() {
+        return firebaseAuthManager.getCurrentUser();
     }
     @Override
     public void onSuccessResult(List<Meal> meals) {

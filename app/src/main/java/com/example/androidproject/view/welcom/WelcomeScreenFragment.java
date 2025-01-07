@@ -47,7 +47,7 @@ public class WelcomeScreenFragment extends Fragment implements IWelcom {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        firebaseAuthManager = new FirebaseAuthManager(this.getActivity(),this);
+        presenter = new welcomScreenPresenter(this);
         login = view.findViewById(R.id.welcomLoginbtn);
         signup = view.findViewById(R.id.welcomSignupbtn);
         guest = view.findViewById(R.id.welcomGuestbtn);
@@ -71,8 +71,7 @@ public class WelcomeScreenFragment extends Fragment implements IWelcom {
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firebaseAuthManager.loginAnonymously();
-
+                presenter.loginAnonymously();
             }
         });
     }

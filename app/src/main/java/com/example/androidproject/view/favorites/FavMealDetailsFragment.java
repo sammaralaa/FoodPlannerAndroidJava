@@ -22,8 +22,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.androidproject.R;
 import com.example.androidproject.database.MealsLocalDataSource;
-import com.example.androidproject.database.weeklyPlandp.WeeklyPlanMeal;
 import com.example.androidproject.model.mealsModel.Meal;
+import com.example.androidproject.network.MealsRemoteDataSource;
 import com.example.androidproject.presenter.MealDetailsPresenter;
 import com.example.androidproject.view.ingrediants.IngredientList;
 import com.example.androidproject.view.ingrediants.IngredientsAdapter;
@@ -43,7 +43,6 @@ public class FavMealDetailsFragment extends Fragment implements IMealDetails {
     ImageView img ,datePicker;
     MealDetailsPresenter presenter;
     Meal mealFull = new Meal();
-    WeeklyPlanMeal weeklyPlanMeal;
     String video_id;
     Button RemoveFromFav , addToPlan;
     Spinner mealTypeSpinner;
@@ -72,7 +71,7 @@ public class FavMealDetailsFragment extends Fragment implements IMealDetails {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new MealDetailsPresenter(this,MealsLocalDataSource.getInstance(this.getContext()));
+        presenter = new MealDetailsPresenter(this,MealsLocalDataSource.getInstance(this.getContext()), MealsRemoteDataSource.getInstance());
         Meal meal = FavMealDetailsFragmentArgs.fromBundle(getArguments()).getMealDetails();
 
         name = view.findViewById(R.id.txtMealNameFav);
@@ -110,8 +109,8 @@ public class FavMealDetailsFragment extends Fragment implements IMealDetails {
             public void onClick(View view) {
                 String mealType = mealTypeSpinner.getSelectedItem().toString();
                 //@NonNull String date, @NonNull String mealType, String dayOfWeek, String mealID, String mealName, String mealThump)
-                weeklyPlanMeal = new WeeklyPlanMeal(selectedDate,mealType,meal.getId(),meal.getMealName(),meal.getMealThumb());
-                presenter.addToPlan(weeklyPlanMeal , mealFull);
+               // weeklyPlanMeal = new WeeklyPlanMeal(selectedDate,mealType,meal.getId(),meal.getMealName(),meal.getMealThumb());
+                presenter.addToPlan(selectedDate,mealType , mealFull);
             }
         });
 
