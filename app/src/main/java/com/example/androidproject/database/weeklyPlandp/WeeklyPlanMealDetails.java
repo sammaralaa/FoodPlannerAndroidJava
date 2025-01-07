@@ -15,12 +15,6 @@ public class WeeklyPlanMealDetails implements Serializable {
         @PrimaryKey
         @NonNull
         public String idMeal;
-        @NonNull
-        @ColumnInfo(name = "date")
-        public String date;
-        @NonNull
-        @ColumnInfo(name = "type")
-        public String mealType;
         @ColumnInfo(name = "name")
         public String strMeal;
         // public Object strDrinkAlternate;
@@ -96,9 +90,12 @@ public class WeeklyPlanMealDetails implements Serializable {
         public String strMeasure19;
         public String strMeasure20;
         public String strSource;
-        //public Object strImageSource;
-        //public Object strCreativeCommonsConfirmed;
-        //public Object dateModified;
+        @NonNull
+        @ColumnInfo(name = "date")
+        public String date;
+        @NonNull
+        @ColumnInfo(name = "type")
+        public String mealType;
 
         public WeeklyPlanMealDetails(String idMeal, String strMeal, String strCategory, String strArea, List<String> ingredients, String strInstructions, String strMealThumb, String strYoutube) {
             this.idMeal = idMeal;

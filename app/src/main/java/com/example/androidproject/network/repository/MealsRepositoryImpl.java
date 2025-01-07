@@ -1,5 +1,7 @@
 package com.example.androidproject.network.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import com.example.androidproject.database.MealsLocalDataSource;
@@ -56,18 +58,23 @@ public class MealsRepositoryImpl implements MealsRepository {
     }
 
     @Override
-    public void insertPlanMeal( WeeklyPlanMealDetails mealDetails){
+    public void insertPlanMeal(WeeklyPlanMealDetails mealDetails){
         localDataSource.insertPlanMeal(mealDetails);
     }
 
     @Override
     public LiveData<List<WeeklyPlanMealDetails>> getLocalPlanMeals(){
+        //Log.i("TAG", "getLocalPlanMeals: "+localDataSource.getLocalPlanMeals().getValue().size());
         return localDataSource.getLocalPlanMeals();
+
     }
+
     @Override
     public WeeklyPlanMealDetails getMealByID(String id){
+
         return localDataSource.getMealByID(id);
     }
+
     @Override
     public void removeMealFromPlan(WeeklyPlanMealDetails meal){
         localDataSource.removeMealFromPlan(meal);

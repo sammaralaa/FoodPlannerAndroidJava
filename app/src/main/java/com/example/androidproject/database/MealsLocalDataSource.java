@@ -15,7 +15,6 @@ public class MealsLocalDataSource {
 
     private static MealsLocalDataSource mealsLocalDataSource =null;
     MealDAO mealDAO;
-  //  WeeklyPlanMealDao weeklyPlanMealDao;
     WeeklyPlanMealDetailsDao weeklyPlanMealDetailsDao;
     Context context;
     Room db;
@@ -76,7 +75,7 @@ public class MealsLocalDataSource {
         }.start();
     }
     public LiveData<List<WeeklyPlanMealDetails>> getLocalPlanMeals(){
-        //Log.i("TAG", "getLocalPlanMeals: "+weeklyPlanList.getValue().size());
+       // Log.i("TAG", "getLocalPlanMeals:---- "+weeklyPlanDetailsList.getValue().size());
         return weeklyPlanDetailsList;
     }
     public WeeklyPlanMealDetails getMealByID(String id) {

@@ -30,6 +30,7 @@ public class HomePresenter implements NetworkCallBack , NetworkCallBackCategory 
         this.iView=iView;
         repository = MealsRepositoryImpl.getInstance(localDataSource,mealsRemoteDataSource);
         firebaseAuthManager = new FirebaseAuthManager(FirebaseAuth.getInstance());
+
     }
     public HomePresenter(){
         firebaseAuthManager = new FirebaseAuthManager(FirebaseAuth.getInstance());
@@ -57,9 +58,9 @@ public class HomePresenter implements NetworkCallBack , NetworkCallBackCategory 
     }
     public void saveCurrentTimeToPreferences() {
         long currentTime = System.currentTimeMillis();
-        editor = sharedPreferences.edit();
-        editor.putLong(KEY_SAVED_TIME, currentTime);
-        editor.apply();
+//        editor = sharedPreferences.edit();
+//        editor.putLong(KEY_SAVED_TIME, currentTime);
+//        editor.apply();
     }
     public void getMealOfDay(long savedTime,String id) {
         long currentTime = System.currentTimeMillis();

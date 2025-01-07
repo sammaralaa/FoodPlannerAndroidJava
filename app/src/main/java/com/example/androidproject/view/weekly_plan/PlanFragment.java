@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class PlanFragment extends Fragment implements IWeeklyPlan , OnDeleteMeal
             @Override
             public void onChanged(List<WeeklyPlanMealDetails> meals1) {
                 adapter.setList(meals1);
+                Log.i("TAG", "onChanged: planFragment "+meals1.size());
                 adapter.notifyDataSetChanged();
             }
         });
